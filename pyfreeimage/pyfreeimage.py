@@ -17,4 +17,9 @@ def get_version():
     """Return the current version of the library, as a string."""
     return libfi.FreeImage_GetVersion()
 
+def get_copyright_message():
+    """Return the copyright text of the library, as a string."""
+    return libfi.FreeImage_GetCopyrightMessage()
+
 init_signature('GetVersion', c_char_p, None)
+init_signature('GetCopyrightMessage', c_char_p, None)
