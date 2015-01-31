@@ -1,6 +1,7 @@
 import ctypes
 
 from ctypes import c_char_p
+from ctypes import c_int
 from ctypes import c_uint
 from ctypes import c_void_p
 
@@ -24,5 +25,10 @@ def get_copyright_message():
     return libfi.FreeImage_GetCopyrightMessage()
 
 
+def get_file_type(filename, size=0):
+    """Return the type of the image as an int; `size` is unused."""
+    return libfi.FreeImage_GetFileType(filename, size)
+
 init_signature('GetVersion', c_char_p, None)
 init_signature('GetCopyrightMessage', c_char_p, None)
+init_signature('GetFileType', c_int, [c_char_p, c_int])
