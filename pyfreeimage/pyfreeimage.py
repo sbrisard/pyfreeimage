@@ -5,6 +5,8 @@ from ctypes import c_int
 from ctypes import c_uint
 from ctypes import c_void_p
 
+from constants import Type
+
 libfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
 
 
@@ -39,9 +41,11 @@ class Bitmap:
     def __exit__(self):
         pass
 
-def empty(type, width, height, bpp, rmask=0, gmask=0, bmask=0,
-          fitype='FIT_BITMAP'):
-    libfi.FreeImage_AllocateT(fitype, width, height, bpp, rmask, gmask, bmask)
+def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
+          fitype=Type.bitmap):
+    dib = libfi.FreeImage_AllocateT(fitype.value, width, height, bpp,
+                                    rmask, gmask, bmask)
+    return Bitmap(dib)
 
 init_signature('GetVersion', c_char_p, None)
 init_signature('GetCopyrightMessage', c_char_p, None)
