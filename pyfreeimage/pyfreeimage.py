@@ -32,8 +32,14 @@ def get_file_type(filename, size=0):
 
 
 class Bitmap:
+    _type = dict((t.value, t) for t in Type)
+
     def __init__(self, dib):
         self._dib = dib
+        self.itype = Bitmap._type[libfi.FreeImage_GetImageType(dib)]
+        self.width = libfi.FreeImage_GetWidth(dib)
+        self.height = libfi.FreeImage_GetHeight(dib)
+        self.bpp = libfi.FreeImage_GetBPP(dib)
 
     def __enter__(self):
         return self
@@ -54,4 +60,9 @@ init_signature('AllocateT', c_void_p, [c_int, # type
                                        c_int, c_int, # width, depth
                                        c_int, # bpp
                                        c_uint, c_uint, c_uint]) # RGB masks
-init_signature('GetBPP', c_uint, [c_void_p])
+init_signature('GetImageType', c_int)
+init_signature('GetColorsUsed')
+init_signature('GetBPP')
+init_signature('GetWidth')
+init_signature('GetHeight')
+init_signature('GetLine')
