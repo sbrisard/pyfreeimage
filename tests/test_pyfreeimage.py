@@ -12,7 +12,7 @@ def test_get_version():
                           (b'data/tulips.tif', Type.bitmap, 768, 512, 24)])
 def test_load(name, fitype, width, height, bpp):
     bitmap = pyfi.load(name)
-    assert bitmap.itype == fitype
+    assert bitmap.fitype == fitype
     assert bitmap.width == width
     assert bitmap.height == height
     assert bitmap.bpp == bpp

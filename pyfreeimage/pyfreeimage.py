@@ -37,7 +37,7 @@ def get_file_type(filename, size=0):
 class Bitmap:
     def __init__(self, dib):
         self._dib = dib
-        self.itype = _reverse_type[libfi.FreeImage_GetImageType(dib)]
+        self.fitype = _reverse_type[libfi.FreeImage_GetImageType(dib)]
         self.width = libfi.FreeImage_GetWidth(dib)
         self.height = libfi.FreeImage_GetHeight(dib)
         self.bpp = libfi.FreeImage_GetBPP(dib)
