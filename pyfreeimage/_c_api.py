@@ -27,3 +27,6 @@ init_signature('GetWidth')
 init_signature('GetHeight')
 init_signature('GetLine')
 init_signature('Load', c_void_p, [c_int, c_char_p, c_int])
+
+__copyright_message__ = libfi.FreeImage_GetCopyrightMessage().decode('ascii')
+__version__ = libfi.FreeImage_GetVersion().decode('ascii')

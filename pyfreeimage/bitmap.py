@@ -1,17 +1,9 @@
 from pyfreeimage._constants import Format, Type
 from pyfreeimage._c_api import libfi
 
+
 _reverse_format = dict((f.value, f) for f in Format)
 _reverse_type = dict((t.value, t) for t in Type)
-
-def get_version():
-    """Return the current version of the library, as a string."""
-    return libfi.FreeImage_GetVersion()
-
-
-def get_copyright_message():
-    """Return the copyright text of the library, as a string."""
-    return libfi.FreeImage_GetCopyrightMessage()
 
 
 def get_file_type(filename, size=0):
@@ -33,11 +25,13 @@ class Bitmap:
     def __exit__(self):
         pass
 
+
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
           fitype=Type.bitmap):
     dib = libfi.FreeImage_AllocateT(fitype.value, width, height, bpp,
                                     rmask, gmask, bmask)
     return Bitmap(dib)
+
 
 def load(name, fmt=None, flags=0):
     if fmt is None:
