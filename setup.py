@@ -19,7 +19,7 @@ class parse_header(Command):
     def run(self):
         enum_names = {'FIF': 'Format', 'FIT': 'Type'}
         enum_members = self.parse_enums(enum_names.keys())
-        with open('./pyfreeimage/constants.py', 'w') as f:
+        with open('./pyfreeimage/_constants.py', 'w') as f:
             self.write_enums(f, enum_names, enum_members)
 
 

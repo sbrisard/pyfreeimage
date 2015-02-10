@@ -1,5 +1,4 @@
-from .constants import Format
-from .constants import Type
+from pyfreeimage._constants import Format, Type
 from pyfreeimage._c_api import libfi
 
 _reverse_format = dict((f.value, f) for f in Format)
