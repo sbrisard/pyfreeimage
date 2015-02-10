@@ -1,8 +1,8 @@
 import pytest
 
-import pyfreeimage.pyfreeimage as pyfi
+import pyfreeimage as pyfi
 
-from pyfreeimage.pyfreeimage import Type
+from pyfreeimage import Type
 
 def test_get_version():
     assert pyfi.get_version() == b'3.16.0'
