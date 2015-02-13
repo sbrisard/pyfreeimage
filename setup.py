@@ -3,8 +3,79 @@ import re
 
 from collections import OrderedDict
 from distutils.core import Command
+from functools import partial
 
 from setuptools import setup
+
+
+def format_key(key, prefix):
+    """Return key, stripped of prefix and converted to lower case."""
+    if not(key.startswith(prefix)):
+        raise ValueError('String \'{}\' does not '
+                         'start with \'{}\'.'.format(key, prefix))
+    else:
+        return key[len(prefix):].lower()
+
+
+def format_dict_keys(d, formatter=None):
+    """Apply `formatter` to all keys of `d` and return a new dictionnary."""
+    if formatter is None:
+        def formatter(key):
+            return key
+    return OrderedDict((formatter(key), value) for key, value in d.items())
+
+
+def parse_enum(header, prefix):
+    """Return an enum defined in the header file as a dictionary.
+
+    This function returns a dictionary of all constants defined in
+    the header, whose name starts with `prefix`. `header` is the list
+    of lines of the header file.
+
+    """
+    enum = OrderedDict()
+    pattern = re.compile('\s*((' + prefix + ')_(\S+))\s*=\s*([^,\n\s]*)')
+    for line in header:
+        result = pattern.match(line)
+        if result is not None:
+            key, value = result.group(1), result.group(4)
+            try:
+                value = int(value)
+            except ValueError:
+                value = enum[value]
+            enum[key] = value
+    return enum
+
+
+def write_enum(f, name, members):
+    """Write the Python code for the definition of one enum.
+
+    `f` is the file to which the enum definition is to be written;
+    `name` is the name the enum will be given in this file. `members`
+    is a dictionary of `name: value` entries which define the members
+    of the enum.
+
+    """
+    f.write('class {0}(Enum):\n'.format(name))
+    for key, value in members.items():
+        f.write('    {0} = {1}\n'.format(key, value))
+
+
+def write_enums(f, names, members):
+    """Write the python code for the definition of several enums.
+
+    `f` is the file to which the enum definitions are to be written.
+    `enum_names`, `enum_members` are two dictionaries sharing the same
+    set of keys. Let `key` be one such common key. Then `names[key]` is
+    the name the enum will be given in the file; `members[key]` is a
+    dictionary of `name: value` entries wich define the members of the
+    enum.
+
+    """
+    f.write('from enum import Enum\n')
+    for prefix, name in names.items():
+        f.write('\n\n')
+        write_enum(f, name, members[prefix])
 
 
 class parse_header(Command):
@@ -17,39 +88,30 @@ class parse_header(Command):
         pass
 
     def run(self):
-        enum_names = {'FIF': 'Format', 'FIT': 'Type'}
-        enum_members = self.parse_enums(enum_names.keys())
+        with open(self.where, 'r', encoding='latin-1') as f:
+            header = f.readlines()
+        enum_names = OrderedDict([('FIT', 'Type'), ('FIF', 'Format')])
+        enum_members = OrderedDict()
+        for prefix in enum_names.keys():
+            formatter = partial(format_key, prefix=prefix + '_')
+            enum_members[prefix] = format_dict_keys(parse_enum(header, prefix),
+                                                    formatter)
         with open('./pyfreeimage/_constants.py', 'w') as f:
-            self.write_enums(f, enum_names, enum_members)
+            write_enums(f, enum_names, enum_members)
 
-
-    def parse_enums(self, prefixes):
-        dicts = dict((prefix, OrderedDict()) for prefix in prefixes)
-        all_constants = dict()
-        pattern = re.compile('\s*((' +
+    def parse_io_flags(self, fitypes):
+        prefixes = [fitype.upper() for fitype in fitypes]
+        extra = ['FIF_LOAD_NOPIXELS']
+        pattern = re.compile('\s*#define\s*((' +
                              '|'.join(prefixes) +
-                             ')_(\S+))\s*=\s*([^,\n\s]*)')
-
+                             ')_\S+|' +
+                             '|'.join(extra) +
+                             ')\s*([^,\n\s]*)')
         with open(self.where, 'r', encoding='latin-1') as f:
             for line in f:
                 result = pattern.match(line)
                 if result is not None:
-                    key = result.group(3).lower()
-                    try:
-                        value = int(result.group(4))
-                    except ValueError:
-                        value = all_constants[result.group(4)]
-                    all_constants[result.group(1)] = value
-                    dicts[result.group(2)][key] = value
-        return dicts
-
-    def write_enums(self, f, enum_names, enum_members):
-        f.write('from enum import Enum\n')
-        for prefix, enum_name in enum_names.items():
-            f.write('\n\n')
-            f.write('class {0}(Enum):\n'.format(enum_name))
-            for item in enum_members[prefix].items():
-                f.write('    {0} = {1}\n'.format(*item))
+                    print(result.group(1), result.group(3))
 
 
 setup(name='pyfreeimage',
