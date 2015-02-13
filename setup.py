@@ -78,6 +78,20 @@ def write_enums(f, names, members):
         write_enum(f, name, members[prefix])
 
 
+def parse_io_flags(header, fiformats):
+    prefixes = [fiformat.upper() for fiformat in fiformats]
+    extra = ['FIF_LOAD_NOPIXELS']
+    pattern = re.compile('\s*#define\s*((' +
+                         '|'.join(prefixes) +
+                         ')_\S+|' +
+                         '|'.join(extra) +
+                         ')\s*([^,\n\s]*)')
+    for line in header:
+        result = pattern.match(line)
+        if result is not None:
+            print(result.group(1), result.group(3))
+
+
 class parse_header(Command):
     user_options = [('where=', None, 'Path to the FreeImage.h header file.')]
 
@@ -98,20 +112,7 @@ class parse_header(Command):
                                                     formatter)
         with open('./pyfreeimage/_constants.py', 'w') as f:
             write_enums(f, enum_names, enum_members)
-
-    def parse_io_flags(self, fitypes):
-        prefixes = [fitype.upper() for fitype in fitypes]
-        extra = ['FIF_LOAD_NOPIXELS']
-        pattern = re.compile('\s*#define\s*((' +
-                             '|'.join(prefixes) +
-                             ')_\S+|' +
-                             '|'.join(extra) +
-                             ')\s*([^,\n\s]*)')
-        with open(self.where, 'r', encoding='latin-1') as f:
-            for line in f:
-                result = pattern.match(line)
-                if result is not None:
-                    print(result.group(1), result.group(3))
+        parse_io_flags(header, enum_members['FIF'].keys())
 
 
 setup(name='pyfreeimage',
