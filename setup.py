@@ -19,18 +19,23 @@ def format_key(key, prefix):
         return key[len(prefix):].lower()
 
 
-def format_enum_name(name):
-    """Convert C enum names to more pythonic names.
+def python_enum_name(c_enum_name):
+    """Return the Python name of the `FI_ENUM`."""
+    # First handle special cases
+    names = {'FREE_IMAGE_TMO': 'ToneMappingOperator',
+             'FREE_IMAGE_MDMODEL': 'MetadataModel',
+             'FREE_IMAGE_MDTYPE': 'MetadataType'}
+    if c_enum_name in names:
+        return names[c_enum_name]
 
-    Use camel-case, and remove 'FREE_IMAGE_' prefix.
-    """
+    # Then use automatic conversion
     prefix = 'FREE_IMAGE_'
-    if name.startswith(prefix):
-        tokens = name[len(prefix):].split('_')
+    if c_enum_name.startswith(prefix):
+        tokens = c_enum_name[len(prefix):].split('_')
         return ''.join(token.capitalize() for token in tokens)
     else:
         raise ValueError('Enum name should start with '
-                         'FREE_IMAGE (got {})'.format(name))
+                         'FREE_IMAGE (got {})'.format(c_enum_name))
 
 def format_dict_keys(d, formatter=None):
     """Apply `formatter` to all keys of `d` and return a new dictionnary."""
