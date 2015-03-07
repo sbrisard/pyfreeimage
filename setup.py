@@ -8,17 +8,6 @@ from functools import partial
 from setuptools import setup
 
 
-def format_key(key, prefix):
-    """Return key, stripped of prefix and converted to lower case."""
-    if prefix is None:
-        return key
-    if not(key.startswith(prefix)):
-        raise ValueError('String \'{}\' does not '
-                         'start with \'{}\'.'.format(key, prefix))
-    else:
-        return key[len(prefix):].lower()
-
-
 def python_enum_name(c_enum_name):
     """Return the Python name of the `FI_ENUM`."""
     # First handle special cases
