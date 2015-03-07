@@ -45,27 +45,6 @@ def format_dict_keys(d, formatter=None):
     return OrderedDict((formatter(key), value) for key, value in d.items())
 
 
-def parse_enum(header, prefix):
-    """Return an enum defined in the header file as a dictionary.
-
-    This function returns a dictionary of all constants defined in
-    the header, whose name starts with `prefix`. `header` is the list
-    of lines of the header file.
-
-    """
-    enum = OrderedDict()
-    pattern = re.compile('\s*((' + prefix + ')_(\S+))\s*=\s*([^,\n\s]*)')
-    for line in header:
-        result = pattern.match(line)
-        if result is not None:
-            key, value = result.group(1), result.group(4)
-            try:
-                value = int(value)
-            except ValueError:
-                value = enum[value]
-            enum[key] = value
-    return enum
-
 def parse_enums(header):
     """Return all `FI_ENUM` defined in the header.
 
@@ -152,21 +131,19 @@ def write_enum(f, name, members):
         f.write('    {0} = {1}\n'.format(key, value))
 
 
-def write_enums(f, names, members):
+def write_enums(f, enums):
     """Write the python code for the definition of several enums.
 
     `f` is the file to which the enum definitions are to be written.
-    `enum_names`, `enum_members` are two dictionaries sharing the same
-    set of keys. Let `key` be one such common key. Then `names[key]` is
-    the name the enum will be given in the file; `members[key]` is a
-    dictionary of `name: value` entries wich define the members of the
-    enum.
+    `enums` is a dict of dicts. The keys of enums are the names of the
+    enums to be created, the values are the members of each enum, stored
+    in dicts.
 
     """
     f.write('from enum import Enum\n')
-    for prefix, name in names.items():
+    for name, enum in enums.items():
         f.write('\n\n')
-        write_enum(f, name, members[prefix])
+        write_enum(f, name, enum)
 
 
 def parse_io_flags(header, fiformats):
@@ -180,7 +157,8 @@ def parse_io_flags(header, fiformats):
     for line in header:
         result = pattern.match(line)
         if result is not None:
-            print(result.group(1), result.group(3))
+            #print(result.group(1), result.group(3))
+            pass
 
 
 class parse_header(Command):
@@ -195,15 +173,16 @@ class parse_header(Command):
     def run(self):
         with open(self.where, 'r', encoding='latin-1') as f:
             header = f.readlines()
-        enum_names = OrderedDict([('FIT', 'Type'), ('FIF', 'Format')])
-        enum_members = OrderedDict()
-        for prefix in enum_names.keys():
-            formatter = partial(format_key, prefix=prefix + '_')
-            enum_members[prefix] = format_dict_keys(parse_enum(header, prefix),
-                                                    formatter)
+        c_enums = parse_enums(header)
+        python_enums = dict()
+        for c_name, c_enum in c_enums.items():
+            python_enum = OrderedDict((k[k.index('_')+1:], v)
+                                      for k, v in c_enum.items())
+            python_enums[python_enum_name(c_name)] = python_enum
+
         with open('./pyfreeimage/_constants.py', 'w') as f:
-            write_enums(f, enum_names, enum_members)
-        parse_io_flags(header, enum_members['FIF'].keys())
+            write_enums(f, python_enums)
+        constants = parse_constants(header)
 
 
 setup(name='pyfreeimage',
