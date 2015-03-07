@@ -48,6 +48,42 @@ def parse_enum(header, prefix):
             enum[key] = value
     return enum
 
+def parse_enums(header):
+    """Return all `FI_ENUM` defined in the header.
+
+    This function returns a dict of all enums. The keys are the C names
+    of these enums. The values are dicts themselves.
+
+    """
+    begin_enum = re.compile('\s*FI_ENUM\((.*)\).*')
+    end_enum = re.compile('\s*\}\s*;.*')
+    enum_item = re.compile('\s*(\S+)\s*=\s*([^,\n\s]*)')
+    enums = dict()
+    enum = None
+    for line in header:
+        if enum is None:
+            result = begin_enum.match(line)
+            if result is not None:
+                enum = OrderedDict()
+                enums[result.group(1)] = enum
+        else:
+            # We are already parsing an enum
+            if end_enum.match(line) is not None:
+                # Have we reached the end yet?
+                enum = None
+            else:
+                result = enum_item.match(line)
+                if result is not None:
+                    key, value = result.group(1), result.group(2)
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        value = enum[value]
+                    enum[key] = value
+                else:
+                    raise RuntimeError(line)
+    return enums
+
 
 def write_enum(f, name, members):
     """Write the Python code for the definition of one enum.
