@@ -19,6 +19,19 @@ def format_key(key, prefix):
         return key[len(prefix):].lower()
 
 
+def format_enum_name(name):
+    """Convert C enum names to more pythonic names.
+
+    Use camel-case, and remove 'FREE_IMAGE_' prefix.
+    """
+    prefix = 'FREE_IMAGE_'
+    if name.startswith(prefix):
+        tokens = name[len(prefix):].split('_')
+        return ''.join(token.capitalize() for token in tokens)
+    else:
+        raise ValueError('Enum name should start with '
+                         'FREE_IMAGE (got {})'.format(name))
+
 def format_dict_keys(d, formatter=None):
     """Apply `formatter` to all keys of `d` and return a new dictionnary."""
     if formatter is None:
