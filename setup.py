@@ -85,6 +85,42 @@ def parse_enums(header):
     return enums
 
 
+def parse_constants(header):
+    """Returns a dict of all constants defined in the header.
+
+    Constants which cannot be parsed trivially are excluded from the
+    returned dict. This is the case of constants defined through
+    conditionals.
+
+    """
+    exclude = [re.compile(expr) for expr in ['FREEIMAGE_.*',
+                                             'DLL_.*',
+                                             'GCC.*',
+                                             '_WINDOWS_.*',
+                                             'SEEK.*',
+                                             'FI_RGBA.*',
+                                             'FI_DEFAULT.*',
+                                             'FI_ENUM.*',
+                                             'FI_STRUCT.*',
+                                             'PLUGINS',
+                                             'FI_COLOR_PALETTE_SEARCH_MASK']]
+
+    constants = dict()
+    pattern = re.compile('\s*#define\s*(\S+)\s*([^,\n\s]*)')
+    for line in header:
+        result = pattern.match(line)
+        if (result is not None and
+            all(p.match(result.group(1)) is None for p in exclude)):
+            key, value = result.group(1), result.group(2)
+            print(key, value)
+            try:
+                value = int(value, 0)
+            except ValueError:
+                value = constants[value]
+            constants[key] = value
+    return constants
+
+
 def write_enum(f, name, members):
     """Write the Python code for the definition of one enum.
 
