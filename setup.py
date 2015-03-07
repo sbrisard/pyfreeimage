@@ -82,6 +82,20 @@ def parse_enums(header):
     return enums
 
 
+def c_enums_to_python_enums(c_enums):
+    """Return a dict of enums with more pythonic names."""
+    def rm_prefix(key):
+        return key[key.index('_')+1:]
+
+    python_enums = dict()
+    for c_name, c_enum in c_enums.items():
+        python_enum = OrderedDict((rm_prefix(key), value)
+                                  for key, value in c_enum.items())
+        python_enums[python_enum_name(c_name)] = python_enum
+
+    return python_enums
+
+
 def parse_constants(header):
     """Returns a dict of all constants defined in the header.
 
@@ -174,12 +188,7 @@ class parse_header(Command):
         with open(self.where, 'r', encoding='latin-1') as f:
             header = f.readlines()
         c_enums = parse_enums(header)
-        python_enums = dict()
-        for c_name, c_enum in c_enums.items():
-            python_enum = OrderedDict((k[k.index('_')+1:], v)
-                                      for k, v in c_enum.items())
-            python_enums[python_enum_name(c_name)] = python_enum
-
+        python_enums = c_enums_to_python_enums(c_enums)
         with open('./pyfreeimage/_constants.py', 'w') as f:
             write_enums(f, python_enums)
         constants = parse_constants(header)
