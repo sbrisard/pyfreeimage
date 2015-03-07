@@ -125,7 +125,6 @@ def parse_constants(header):
         if (result is not None and
             all(p.match(result.group(1)) is None for p in exclude)):
             key, value = result.group(1), result.group(2)
-            print(key, value)
             try:
                 value = int(value, 0)
             except ValueError:
