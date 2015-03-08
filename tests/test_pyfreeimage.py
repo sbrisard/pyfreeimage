@@ -5,7 +5,7 @@ import pyfreeimage as pyfi
 from pyfreeimage import Type
 
 def test_get_version():
-    assert pyfi.get_version() == b'3.16.0'
+    assert pyfi.__version__ == '3.16.0'
 
 @pytest.mark.parametrize('name, fitype, width, height, bpp',
                          [(b'data/mountain.tif', Type.BITMAP, 640, 480, 8),
