@@ -27,7 +27,7 @@ class Bitmap:
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
-          fitype=Type.bitmap):
+          fitype=Type.BITMAP):
     dib = libfi.FreeImage_AllocateT(fitype.value, width, height, bpp,
                                     rmask, gmask, bmask)
     return Bitmap(dib)
