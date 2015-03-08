@@ -164,6 +164,18 @@ def parse_io_flags(header, fiformats):
             pass
 
 
+def find_io_flags(constants, fiformats):
+    flags = OrderedDict()
+    # Handle special cases
+    flags['LOAD_NOPIXELS'] = constants['FIF_LOAD_NOPIXELS']
+    # Strip raw formats of the `FIF_` prefix.
+    fiformats = [fiformat[4:] for fiformat in fiformats]
+    for name, value in constants.items():
+        if any(name.startswith(format) for format in fiformats):
+            flags[name] = value
+    return flags
+
+
 class parse_header(Command):
     user_options = [('where=', None, 'Path to the FreeImage.h header file.')]
 
