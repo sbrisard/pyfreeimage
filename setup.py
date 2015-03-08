@@ -105,7 +105,7 @@ def parse_constants(header):
                                              'PLUGINS',
                                              'FI_COLOR_PALETTE_SEARCH_MASK']]
 
-    constants = dict()
+    constants = OrderedDict()
     pattern = re.compile('\s*#define\s*(\S+)\s*([^,\n\s]*)')
     for line in header:
         result = pattern.match(line)
