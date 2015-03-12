@@ -9,11 +9,6 @@ _reverse_format = dict((f.value, f) for f in Format)
 _reverse_type = dict((t.value, t) for t in Type)
 
 
-def get_file_type(filename, size=0):
-    """Return the type of the image as an int; `size` is unused."""
-    return _reverse_format[libfi.FreeImage_GetFileType(filename, size)]
-
-
 class Bitmap:
     def __init__(self, dib):
         self._dib = dib
@@ -27,6 +22,11 @@ class Bitmap:
 
     def __exit__(self):
         pass
+
+
+def get_file_type(filename, size=0):
+    """Return the `Type` of the image."""
+    return _reverse_format[libfi.FreeImage_GetFileType(filename, size)]
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
