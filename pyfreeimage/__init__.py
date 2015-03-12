@@ -1,3 +1,5 @@
+import pyfreeimage.ioflags
+
 from pyfreeimage.bitmap import Bitmap, empty, load
 from pyfreeimage.bitmap import get_file_type
 from pyfreeimage._constants import Format, Type
