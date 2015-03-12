@@ -41,18 +41,12 @@ def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
     return Bitmap(dib)
 
 
-def load(name, fmt=None, flags=None):
-    if isinstance(name, str):
-        name = name.encode()
-    if fmt is None:
-        fif = libfi.FreeImage_GetFileType(name, 0)
+def load(filename, fif=None, flags=0):
+    if isinstance(filename, str):
+        filename = filename.encode()
+    if fif is None:
+        fif = libfi.FreeImage_GetFileType(filename, 0)
     else:
-        fif = fmt.value
-    if flags is None:
-        flags = 0
-    else:
-        flags = functools.reduce(operators.__or__,
-                                 (flag.value for flag in flags),
-                                 initial=0)
-    dib = libfi.FreeImage_Load(fif, name, flags)
+        fif = fif.value
+    dib=libfi.FreeImage_Load(fif, filename, flags)
     return Bitmap(dib)
