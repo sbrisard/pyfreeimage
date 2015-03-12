@@ -191,10 +191,13 @@ class parse_header(Command):
         c_enums = parse_enums(header)
         python_enums = c_enums_to_python_enums(c_enums)
         constants = parse_constants(header)
-        python_enums['IOFlag'] = find_io_flags(constants,
-                                               c_enums['FREE_IMAGE_FORMAT'].keys())
+        ioflags = find_io_flags(constants,
+                                c_enums['FREE_IMAGE_FORMAT'].keys())
         with open('./pyfreeimage/_constants.py', 'w') as f:
             write_enums(f, python_enums)
+        with open('./pyfreeimage/ioflags.py', 'w') as f:
+            for key, value in ioflags.items():
+                f.write('{} = {}\n'.format(key, value))
 
 
 setup(name='pyfreeimage',
