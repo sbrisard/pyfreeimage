@@ -1,15 +1,26 @@
+import glob
+import os.path
+
 import pytest
 
 import pyfreeimage as pyfi
 
 from pyfreeimage import Type
 
-def test_get_version():
-    assert pyfi.__version__ == '3.16.0'
 
-@pytest.mark.parametrize('name, fitype, width, height, bpp',
-                         [(b'data/mountain.tif', Type.BITMAP, 640, 480, 8),
-                          (b'data/tulips.tif', Type.BITMAP, 768, 512, 24)])
+def path_to_reference_images():
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        'images')
+
+
+def pytest_generate_tests(metafunc):
+    if metafunc.function == test_load:
+        files = glob.glob(os.path.join(path_to_reference_images(), 'metro*'))
+        params = [(name, Type.BITMAP, 320, 200,
+                   24 if name.find('gray') == -1 else 8) for name in files]
+        metafunc.parametrize('name, fitype, width, height, bpp', params)
+
+
 def test_load(name, fitype, width, height, bpp):
     bitmap = pyfi.load(name)
     assert bitmap.fitype == fitype
