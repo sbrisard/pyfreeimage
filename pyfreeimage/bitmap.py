@@ -23,6 +23,11 @@ class Bitmap:
     def __exit__(self):
         pass
 
+    def save(self, filename, fif, flags=0):
+        if isinstance(filename, str):
+            filename = filename.encode()
+        libfi.FreeImage_Save(fif.value, self._dib, filename, flags)
+
 
 def get_file_type(filename, size=0):
     """Return the `Type` of the image."""
