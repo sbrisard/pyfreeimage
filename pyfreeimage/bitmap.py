@@ -28,6 +28,10 @@ class Bitmap:
             filename = filename.encode()
         libfi.FreeImage_Save(fif.value, self._dib, filename, flags)
 
+    def copy(self):
+        """Return a copy of the image."""
+        return Bitmap(libfi.FreeImage_Clone(self._dib))
+
 
 def get_file_type(filename, size=0):
     """Return the `Type` of the image."""
