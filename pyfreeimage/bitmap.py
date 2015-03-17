@@ -24,6 +24,15 @@ class Bitmap:
         pass
 
     def save(self, filename, fif, flags=0):
+        """Save the image to a file.
+
+        Args:
+            filename (str): File name.
+            fif (pyfreeimage.Format): File format.
+            flags (int): "or" combination of constants from the
+                ``pyfreeimage.ioflags`` module.
+
+        """
         if isinstance(filename, str):
             filename = filename.encode()
         libfi.FreeImage_Save(fif.value, self._dib, filename, flags)
@@ -34,7 +43,14 @@ class Bitmap:
 
 
 def get_file_type(filename, size=0):
-    """Return the `Type` of the image."""
+    """Return the `Type` of the image.
+
+    Args:
+        filename (str): File name.
+        size (int): unused.
+    Returns:
+        The type of the image as a :class:`pyfreeimage.Type` instance.
+    """
     return _reverse_format[libfi.FreeImage_GetFileType(filename, size)]
 
 
