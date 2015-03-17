@@ -20,8 +20,9 @@ class Bitmap:
     def __enter__(self):
         return self
 
-    def __exit__(self):
-        pass
+    def __exit__(self, exc_type, exc_value, traceback):
+        libfi.FreeImage_Unload(self._dib)
+        return False
 
     def save(self, filename, fif, flags=0):
         """Save the image to a file.
