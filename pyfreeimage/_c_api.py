@@ -29,7 +29,7 @@ init_signature('GetLine')
 init_signature('Load', c_void_p, [c_int, c_char_p, c_int])
 init_signature('Save', c_int, [c_int, c_void_p, c_char_p, c_int])
 init_signature('Clone', c_void_p, [c_void_p])
-
+init_signature('Unload', None, [c_void_p])
 
 __copyright_message__ = libfi.FreeImage_GetCopyrightMessage().decode('ascii')
 __version__ = libfi.FreeImage_GetVersion().decode('ascii')
