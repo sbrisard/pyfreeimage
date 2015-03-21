@@ -1,3 +1,5 @@
+import gc
+
 import pyfreeimage as fi
 
 
@@ -22,8 +24,8 @@ def test():
     fi.Bitmap.__init__ = new_init
 
     for i in range(100):
-        with fi.empty(640, 480, 8) as a:
-            pass
+        a = fi.empty(640, 480, 8)
+    del(a)
 
     assert len(allocated) == 0
 
