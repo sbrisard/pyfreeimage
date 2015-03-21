@@ -1,13 +1,16 @@
 import functools
 import operator
 
+try:
+    from weakref import finalize
+except ImportError:
+    from pyfreeimage.wrutils import finalize
+
 from pyfreeimage._constants import Format, Type
 from pyfreeimage._c_api import libfi
 
-
 _reverse_format = dict((f.value, f) for f in Format)
 _reverse_type = dict((t.value, t) for t in Type)
-
 
 class Bitmap:
     def __init__(self, dib):
@@ -16,13 +19,7 @@ class Bitmap:
         self.width = libfi.FreeImage_GetWidth(dib)
         self.height = libfi.FreeImage_GetHeight(dib)
         self.bpp = libfi.FreeImage_GetBPP(dib)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        libfi.FreeImage_Unload(self._dib)
-        return False
+        finalize(self, libfi.FreeImage_Unload, dib)
 
     def save(self, filename, fif, flags=0):
         """Save the image to a file.
