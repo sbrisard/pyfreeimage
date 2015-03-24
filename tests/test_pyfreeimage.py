@@ -5,8 +5,6 @@ import pytest
 
 import pyfreeimage as pyfi
 
-from pyfreeimage import Type
-
 
 PATH_TO_IMAGES = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               'images')
@@ -19,7 +17,7 @@ def load_metro_tiff():
 def pytest_generate_tests(metafunc):
     if metafunc.function == test_load:
         files = glob.glob(os.path.join(PATH_TO_IMAGES, 'metro*'))
-        params = [(name, Type.BITMAP, 320, 200,
+        params = [(name, pyfi.FIT_BITMAP, 320, 200,
                    24 if name.find('gray') == -1 else 8) for name in files]
         metafunc.parametrize('name, fitype, width, height, bpp', params)
 
