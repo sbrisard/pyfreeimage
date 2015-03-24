@@ -188,16 +188,30 @@ class parse_header(Command):
         pass
 
     def run(self):
+        # with open(self.where, 'r', encoding='latin-1') as f:
+        #     header = f.readlines()
+        # c_enums = parse_enums(header)
+        # python_enums = c_enums_to_python_enums(c_enums)
+        # constants = parse_constants(header)
+        # ioflags = find_io_flags(constants,
+        #                         c_enums['FREE_IMAGE_FORMAT'].keys())
+        # with open('./pyfreeimage/_constants.py', 'w') as f:
+        #     write_enums(f, python_enums)
+        # with open('./pyfreeimage/ioflags.py', 'w') as f:
+        #     for key, value in ioflags.items():
+        #         f.write('{} = {}\n'.format(key, value))
         with open(self.where, 'r', encoding='latin-1') as f:
             header = f.readlines()
         c_enums = parse_enums(header)
-        python_enums = c_enums_to_python_enums(c_enums)
         constants = parse_constants(header)
         ioflags = find_io_flags(constants,
                                 c_enums['FREE_IMAGE_FORMAT'].keys())
         with open('./pyfreeimage/_constants.py', 'w') as f:
-            write_enums(f, python_enums)
-        with open('./pyfreeimage/ioflags.py', 'w') as f:
+            for name, enum in c_enums.items():
+                f.write('\n# {}\n\n'.format(name))
+                for key, value in enum.items():
+                    f.write('{} = {}\n'.format(key, value))
+            f.write('\n# I/O flags\n\n'.format(name))
             for key, value in ioflags.items():
                 f.write('{} = {}\n'.format(key, value))
 
