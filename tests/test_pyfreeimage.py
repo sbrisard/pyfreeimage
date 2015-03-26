@@ -11,7 +11,7 @@ PATH_TO_IMAGES = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 
 def load_metro_tiff():
-    return pyfi.load(os.path.join(PATH_TO_IMAGES, 'metro.tif'))
+    return pyfi.io.load(os.path.join(PATH_TO_IMAGES, 'metro.tif'))
 
 
 def pytest_generate_tests(metafunc):
@@ -23,7 +23,7 @@ def pytest_generate_tests(metafunc):
 
 
 def test_load(name, fitype, width, height, bpp):
-    bitmap = pyfi.load(name)
+    bitmap = pyfi.io.load(name)
     assert bitmap.fitype == fitype
     assert bitmap.width == width
     assert bitmap.height == height
