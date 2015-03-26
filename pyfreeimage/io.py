@@ -17,12 +17,12 @@ def load(filename, fif=None, flags=0):
     return Bitmap(dib)
 
 
-def save(filename, fif, flags=0):
+def save(filename, image, fif, flags=0):
     """Save the image to a file.
 
     Args:
         filename (str): Name of the file to which the image is saved.
-        image (:class:`Bitmap`): Image to be saved.
+        image (:class:`pyfreeimage.bitmap.Bitmap`): Image to be saved.
         fif (int): File format; one of the ``FIF_*`` constants.
         flags (int): or combination of the I/O flags.
 
