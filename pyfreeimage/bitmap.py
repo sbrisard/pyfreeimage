@@ -6,7 +6,8 @@ try:
 except ImportError:
     from pyfreeimage.wrutils import finalize
 
-from pyfreeimage.constants import FIT_BITMAP
+import pyfreeimage.constants
+
 from pyfreeimage._c_api import libfi
 
 
@@ -64,7 +65,7 @@ def get_file_format(filename, size=0):
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
-          fitype=FIT_BITMAP):
+          fitype=pyfreeimage.constants.FIT_BITMAP):
     """Return a new image of specified shape, bit depth and type.
 
     The returned image is filled with zeros. For 8-bit images only,
