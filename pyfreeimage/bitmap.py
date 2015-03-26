@@ -11,19 +11,40 @@ from pyfreeimage._c_api import libfi
 
 
 class Bitmap:
-    """Docstring."""
+    """Class that represents all images.
+
+    The constructor of this class should not be called directly. Use the
+    following functions instead:
+      - :func:`pyfreeimage.bitmap.empty`
+      - :func:`pyfreeimage.bitmap.load`
+
+    Args:
+        dib (int): pointer to the underlying FreeImage structure.
+    """
 
     def __init__(self, dib):
         self._dib = dib
-        self.width = libfi.FreeImage_GetWidth(dib)
-        self.height = libfi.FreeImage_GetHeight(dib)
-        self.bpp = libfi.FreeImage_GetBPP(dib)
         finalize(self, libfi.FreeImage_Unload, dib)
 
     @property
     def fitype(self):
         """The type of the image (as a ``FIT_*`` constant)."""
         return libfi.FreeImage_GetImageType(self._dib)
+
+    @property
+    def bpp(self):
+        """The number of bits per pixel."""
+        return libfi.FreeImage_GetBPP(self._dib)
+
+    @property
+    def width(self):
+        """The width of the image in pixels."""
+        return libfi.FreeImage_GetWidth(self._dib)
+
+    @property
+    def height(self):
+        """The height of the image in pixels."""
+        return libfi.FreeImage_GetHeight(self._dib)
 
     def copy(self):
         """Return a copy of the image."""
