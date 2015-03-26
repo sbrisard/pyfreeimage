@@ -15,8 +15,8 @@ class Bitmap:
 
     The constructor of this class should not be called directly. Use the
     following functions instead:
-      - :func:`pyfreeimage.bitmap.empty`
-      - :func:`pyfreeimage.bitmap.load`
+    - :func:`pyfreeimage.bitmap.empty`
+    - :func:`pyfreeimage.bitmap.load`
 
     Args:
         dib (int): pointer to the underlying FreeImage structure.
@@ -47,7 +47,7 @@ class Bitmap:
         return libfi.FreeImage_GetHeight(self._dib)
 
     def copy(self):
-        """Return a copy of the image."""
+        """Return a deep copy of the image."""
         return Bitmap(libfi.FreeImage_Clone(self._dib))
 
 
