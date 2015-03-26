@@ -65,6 +65,23 @@ def get_file_format(filename, size=0):
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
           fitype=FIT_BITMAP):
+    """Return a new image of specified shape, bit depth and type.
+
+    The returned image is filled with zeros. For 8-bit images only,
+    this function builds a default greyscale palette.
+
+    Args:
+        width (int): Width of the image.
+        height (int): Height of the image.
+        bpp (int): Bit depth.
+        rmask (int): Bit layout of the red component.
+        gmask (int): Bit layout of the green component.
+        bmask (int): Bit layout of the blue component.
+        fitype (int): Type of the image (one of the ``FIT_*`` constants).
+    Returns:
+        A new instance of :class:`pyfreeimage.bitmap.Bitmap`.
+
+    """
     dib = libfi.FreeImage_AllocateT(fitype, width, height, bpp,
                                     rmask, gmask, bmask)
     return Bitmap(dib)
