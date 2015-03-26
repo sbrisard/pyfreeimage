@@ -24,14 +24,14 @@ class Bitmap:
         return Bitmap(libfi.FreeImage_Clone(self._dib))
 
 
-def get_file_type(filename, size=0):
-    """Return the type of the image.
+def get_file_format(filename, size=0):
+    """Return the format (as a ``FIF_*`` constant) of the file.
 
     Args:
         filename (str): Name of the file where the image is stored.
         size (int): unused.
     Returns:
-        The type of the image as an int (one of the ``FIF_*`` constants).
+        The format as an int.
     """
     return libfi.FreeImage_GetFileType(filename, size)
 
