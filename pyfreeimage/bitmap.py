@@ -11,13 +11,19 @@ from pyfreeimage._c_api import libfi
 
 
 class Bitmap:
+    """Docstring."""
+
     def __init__(self, dib):
         self._dib = dib
-        self.fitype = libfi.FreeImage_GetImageType(dib)
         self.width = libfi.FreeImage_GetWidth(dib)
         self.height = libfi.FreeImage_GetHeight(dib)
         self.bpp = libfi.FreeImage_GetBPP(dib)
         finalize(self, libfi.FreeImage_Unload, dib)
+
+    @property
+    def fitype(self):
+        """The type of the image (as a ``FIT_*`` constant)."""
+        return libfi.FreeImage_GetImageType(self._dib)
 
     def copy(self):
         """Return a copy of the image."""
