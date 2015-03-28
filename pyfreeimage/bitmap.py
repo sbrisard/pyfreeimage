@@ -16,8 +16,9 @@ class Bitmap:
 
     The constructor of this class should not be called directly. Use the
     following functions instead:
+
     - :func:`pyfreeimage.bitmap.empty`
-    - :func:`pyfreeimage.bitmap.load`
+    - :func:`pyfreeimage.io.load`
 
     Args:
         dib (int): pointer to the underlying FreeImage structure.
