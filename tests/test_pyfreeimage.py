@@ -17,17 +17,22 @@ def load_metro_tiff():
 def pytest_generate_tests(metafunc):
     if metafunc.function == test_load:
         files = glob.glob(os.path.join(PATH_TO_IMAGES, 'metro*'))
-        params = [(name, pyfi.FIT_BITMAP, 320, 200,
-                   24 if name.find('gray') == -1 else 8) for name in files]
-        metafunc.parametrize('name, fitype, width, height, bpp', params)
+        params = [(name, pyfi.FIT_BITMAP,
+                   0 if name.find('gray') == -1 else 256,
+                   24 if name.find('gray') == -1 else 8,
+                   320, 200) for name in files]
+        metafunc.parametrize('name, fitype, palette_size, bpp, width, height',
+                             params)
 
 
-def test_load(name, fitype, width, height, bpp):
+def test_load(name, fitype, palette_size, bpp, width, height):
     bitmap = pyfi.io.load(name)
     assert bitmap.fitype == fitype
+    assert bitmap.palette_size == palette_size
+    assert bitmap.bpp == bpp
     assert bitmap.width == width
     assert bitmap.height == height
-    assert bitmap.bpp == bpp
+    assert bitmap.line == (bitmap.width * bitmap.bpp) // 8
 
 
 def test_copy():

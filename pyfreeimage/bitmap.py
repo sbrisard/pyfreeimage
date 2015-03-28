@@ -33,6 +33,11 @@ class Bitmap:
         return libfi.FreeImage_GetImageType(self._dib)
 
     @property
+    def palette_size(self):
+        """Return the size of the palette (0 for high-color bitmaps.'"""
+        return libfi.FreeImage_GetColorsUsed(self._dib)
+
+    @property
     def bpp(self):
         """The number of bits per pixel."""
         return libfi.FreeImage_GetBPP(self._dib)
@@ -46,6 +51,21 @@ class Bitmap:
     def height(self):
         """The height of the image in pixels."""
         return libfi.FreeImage_GetHeight(self._dib)
+
+    @property
+    def line(self):
+        """The width of the image in bytes."""
+        return libfi.FreeImage_GetLine(self._dib)
+
+    @property
+    def pitch(self):
+        """The stride of the underlying data array.
+
+        The pitch is the width of the image in bytes, rounded-up to the
+        next 32-bit boundary.
+
+        """
+        return libfi.FreeImage_GetPitch(self._dib)
 
     def copy(self):
         """Return a deep copy of the image."""
