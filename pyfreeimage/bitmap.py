@@ -73,18 +73,6 @@ class Bitmap:
         return Bitmap(libfi.FreeImage_Clone(self._dib))
 
 
-def get_file_format(filename, size=0):
-    """Return the format (as a ``FIF_*`` constant) of the file.
-
-    Args:
-        filename (str): Name of the file where the image is stored.
-        size (int): unused.
-    Returns:
-        The format as an int.
-    """
-    return libfi.FreeImage_GetFileType(filename, size)
-
-
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
           fitype=pyfreeimage.constants.FIT_BITMAP):
     """Return a new image of specified shape, bit depth and type.

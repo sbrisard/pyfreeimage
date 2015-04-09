@@ -1,6 +1,19 @@
 from pyfreeimage._c_api import libfi
 from pyfreeimage.bitmap import Bitmap
 
+
+def get_file_format(filename, size=0):
+    """Return the format (as a ``FIF_*`` constant) of the file.
+
+    Args:
+        filename (str): Name of the file where the image is stored.
+        size (int): unused.
+    Returns:
+        The format as an int.
+    """
+    return libfi.FreeImage_GetFileType(filename, size)
+
+
 def load(filename, fif=None, flags=0):
     """Read an image from a file.
 
@@ -12,7 +25,7 @@ def load(filename, fif=None, flags=0):
     if isinstance(filename, str):
         filename = filename.encode()
     if fif is None:
-        fif = libfi.FreeImage_GetFileType(filename, 0)
+        fif = get_file_format(filename, 0)
     dib=libfi.FreeImage_Load(fif, filename, flags)
     return Bitmap(dib)
 
