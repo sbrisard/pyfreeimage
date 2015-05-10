@@ -8,6 +8,8 @@ from ctypes import c_uint16
 from ctypes import c_uint32
 from ctypes import c_void_p
 
+c_void_p_p = ctypes.POINTER(c_void_p)
+
 cfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
 
 def init_signature(func_name, restype=c_uint, argtypes=[c_void_p]):
@@ -46,7 +48,9 @@ init_signature('GetTagCount', c_uint32)
 init_signature('GetTagLength', c_uint32)
 init_signature('GetTagValue', c_void_p)
 
-init_signature('FindFirstMetadata', c_void_p, [c_int, c_void_p, ctypes.POINTER(c_void_p)])
+init_signature('FindFirstMetadata', c_void_p, [c_int, c_void_p, c_void_p_p])
+init_signature('FindNextMetadata', c_bool, [c_void_p, c_void_p_p])
+init_signature('FindCloseMetadata', None, [c_void_p])
 init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
 init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
 
