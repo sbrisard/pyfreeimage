@@ -1,12 +1,6 @@
 import ctypes
 
-from ctypes import c_bool
-from ctypes import c_char_p
-from ctypes import c_int
-from ctypes import c_uint
-from ctypes import c_uint16
-from ctypes import c_uint32
-from ctypes import c_void_p
+from ctypes import c_bool, c_char_p, c_int, c_uint, c_uint16, c_uint32, c_void_p
 
 c_void_p_p = ctypes.POINTER(c_void_p)
 
