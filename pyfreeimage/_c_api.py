@@ -1,8 +1,11 @@
 import ctypes
 
+from ctypes import c_bool
 from ctypes import c_char_p
 from ctypes import c_int
 from ctypes import c_uint
+from ctypes import c_uint16
+from ctypes import c_uint32
 from ctypes import c_void_p
 
 libfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
@@ -31,6 +34,21 @@ init_signature('Load', c_void_p, [c_int, c_char_p, c_int])
 init_signature('Save', c_int, [c_int, c_void_p, c_char_p, c_int])
 init_signature('Clone', c_void_p, [c_void_p])
 init_signature('Unload', None, [c_void_p])
+
+init_signature('CreateTag', c_void_p, [])
+init_signature('DeleteTag', None)
+init_signature('CloneTag', c_void_p)
+init_signature('GetTagKey', c_char_p)
+init_signature('GetTagDescription', c_char_p)
+init_signature('GetTagID', c_uint16)
+init_signature('GetTagType', c_int)
+init_signature('GetTagCount', c_uint32)
+init_signature('GetTagLength', c_uint32)
+init_signature('GetTagValue', c_void_p)
+
+init_signature('FindFirstMetadata', c_void_p, [c_int, c_void_p, ctypes.POINTER(c_void_p)])
+init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
+init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
 
 __copyright_message__ = libfi.FreeImage_GetCopyrightMessage().decode('ascii')
 __version__ = libfi.FreeImage_GetVersion().decode('ascii')
