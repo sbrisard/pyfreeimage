@@ -51,6 +51,7 @@ class Tag:
         type = self.type
         data = cfi.FreeImage_GetTagValue(self._tag)
         if type == FIDT_ASCII:
-            #return cast(cfi.FreeImage_GetTagValue(self._tag), c_char_p).value
-            array_type = c_byte * self.count
-            return array_type.from_address(data)
+            return cast(cfi.FreeImage_GetTagValue(self._tag), c_char_p).value
+        else:
+            raise NotImplementedError('Cannot compute value of'
+                                      'tag type {}'.format(type))
