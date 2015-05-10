@@ -2,7 +2,7 @@ import ctypes
 import pyfreeimage as pyfi
 import pyfreeimage.metadata as md
 
-from pyfreeimage._c_api import libfi as cfi
+from pyfreeimage._c_api import cfi
 
 if __name__ == '__main__':
     img = pyfi.io.load('/Users/sb/Documents/tmp/IMGP3980.jpg')

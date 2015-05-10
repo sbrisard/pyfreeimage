@@ -6,7 +6,7 @@ import pyfreeimage as fi
 
 from numpy.lib.stride_tricks import as_strided
 
-from pyfreeimage._c_api import libfi, init_signature
+from pyfreeimage._c_api import cfi, init_signature
 
 if __name__ == '__main__':
 
@@ -19,7 +19,7 @@ if __name__ == '__main__':
                         'images')
     img = fi.io.load(os.path.join(path, 'metro-gray.tif'))
 
-    data = numpy.ctypeslib.as_array(libfi.FreeImage_GetBits(img._dib),
+    data = numpy.ctypeslib.as_array(cfi.FreeImage_GetBits(img._dib),
                                     shape=(img.line * img.height,))
 
     new_shape = (img.height, img.width)
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     img = fi.io.load(os.path.join(path, 'metro.tif'))
 
-    data = numpy.ctypeslib.as_array(libfi.FreeImage_GetBits(img._dib),
+    data = numpy.ctypeslib.as_array(cfi.FreeImage_GetBits(img._dib),
                                     shape=(img.line * img.height,))
 
     new_shape = (img.height, img.width, 3)

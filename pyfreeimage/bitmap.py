@@ -8,7 +8,7 @@ except ImportError:
 
 import pyfreeimage.constants
 
-from pyfreeimage._c_api import libfi
+from pyfreeimage._c_api import cfi
 
 
 class Bitmap:
@@ -26,37 +26,37 @@ class Bitmap:
 
     def __init__(self, dib):
         self._dib = dib
-        finalize(self, libfi.FreeImage_Unload, dib)
+        finalize(self, cfi.FreeImage_Unload, dib)
 
     @property
     def fitype(self):
         """The type of the image (as a ``FIT_*`` constant)."""
-        return libfi.FreeImage_GetImageType(self._dib)
+        return cfi.FreeImage_GetImageType(self._dib)
 
     @property
     def palette_size(self):
         """Return the size of the palette (0 for high-color bitmaps.'"""
-        return libfi.FreeImage_GetColorsUsed(self._dib)
+        return cfi.FreeImage_GetColorsUsed(self._dib)
 
     @property
     def bpp(self):
         """The number of bits per pixel."""
-        return libfi.FreeImage_GetBPP(self._dib)
+        return cfi.FreeImage_GetBPP(self._dib)
 
     @property
     def width(self):
         """The width of the image in pixels."""
-        return libfi.FreeImage_GetWidth(self._dib)
+        return cfi.FreeImage_GetWidth(self._dib)
 
     @property
     def height(self):
         """The height of the image in pixels."""
-        return libfi.FreeImage_GetHeight(self._dib)
+        return cfi.FreeImage_GetHeight(self._dib)
 
     @property
     def line(self):
         """The width of the image in bytes."""
-        return libfi.FreeImage_GetLine(self._dib)
+        return cfi.FreeImage_GetLine(self._dib)
 
     @property
     def pitch(self):
@@ -66,11 +66,11 @@ class Bitmap:
         next 32-bit boundary.
 
         """
-        return libfi.FreeImage_GetPitch(self._dib)
+        return cfi.FreeImage_GetPitch(self._dib)
 
     def copy(self):
         """Return a deep copy of the image."""
-        return Bitmap(libfi.FreeImage_Clone(self._dib))
+        return Bitmap(cfi.FreeImage_Clone(self._dib))
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
@@ -92,6 +92,6 @@ def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
         A new instance of :class:`pyfreeimage.bitmap.Bitmap`.
 
     """
-    dib = libfi.FreeImage_AllocateT(fitype, width, height, bpp,
+    dib = cfi.FreeImage_AllocateT(fitype, width, height, bpp,
                                     rmask, gmask, bmask)
     return Bitmap(dib)

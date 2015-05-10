@@ -8,11 +8,11 @@ from ctypes import c_uint16
 from ctypes import c_uint32
 from ctypes import c_void_p
 
-libfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
+cfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
 
 def init_signature(func_name, restype=c_uint, argtypes=[c_void_p]):
-    global libfi
-    f = getattr(libfi, 'FreeImage_' + func_name)
+    global cfi
+    f = getattr(cfi, 'FreeImage_' + func_name)
     f.restype = restype
     f.argtypes = argtypes
 
@@ -50,5 +50,5 @@ init_signature('FindFirstMetadata', c_void_p, [c_int, c_void_p, ctypes.POINTER(c
 init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
 init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
 
-__copyright_message__ = libfi.FreeImage_GetCopyrightMessage().decode('ascii')
-__version__ = libfi.FreeImage_GetVersion().decode('ascii')
+__copyright_message__ = cfi.FreeImage_GetCopyrightMessage().decode('ascii')
+__version__ = cfi.FreeImage_GetVersion().decode('ascii')

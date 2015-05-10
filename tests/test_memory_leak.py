@@ -4,16 +4,16 @@ import pyfreeimage as fi
 
 
 def test():
-    from pyfreeimage._c_api import libfi
+    from pyfreeimage._c_api import cfi
 
     allocated = set()
     # Decorate FreeImage_Unload
-    old_unload = libfi.FreeImage_Unload
+    old_unload = cfi.FreeImage_Unload
     def new_unload(dib):
         assert dib in allocated
         allocated.remove(dib)
         old_unload(dib)
-    libfi.FreeImage_Unload = new_unload
+    cfi.FreeImage_Unload = new_unload
 
     # Decorate Bitmap.__init__
     old_init = fi.Bitmap.__init__
@@ -30,5 +30,5 @@ def test():
     assert len(allocated) == 0
 
     # Restore undecorated functions
-    libfi.FreeImage_Unload = old_unload
+    cfi.FreeImage_Unload = old_unload
     fi.Bitmap.__init__ = old_init

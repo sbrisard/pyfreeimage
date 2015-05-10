@@ -3,7 +3,7 @@ import ctypes
 from ctypes import cast, c_byte, c_char_p, c_void_p
 from weakref import finalize
 
-from pyfreeimage._c_api import libfi as cfi
+from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
 fidt = {FIDT_BYTE: ctypes.c_byte,
