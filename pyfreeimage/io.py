@@ -27,6 +27,9 @@ def load(filename, fif=None, flags=0):
     if fif is None:
         fif = get_file_format(filename, 0)
     dib = cfi.FreeImage_Load(fif, filename, flags)
+    if dib is None:
+        # TODO Define new exception
+        raise RuntimeError(filename)
     return Image(dib)
 
 
