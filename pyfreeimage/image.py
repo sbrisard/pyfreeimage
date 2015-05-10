@@ -11,13 +11,13 @@ import pyfreeimage.constants
 from pyfreeimage._c_api import cfi
 
 
-class Bitmap:
+class Image:
     """Class that represents all images.
 
     The constructor of this class should not be called directly. Use the
     following functions instead:
 
-    - :func:`pyfreeimage.bitmap.empty`
+    - :func:`pyfreeimage.image.empty`
     - :func:`pyfreeimage.io.load`
 
     Args:
@@ -70,7 +70,7 @@ class Bitmap:
 
     def copy(self):
         """Return a deep copy of the image."""
-        return Bitmap(cfi.FreeImage_Clone(self._dib))
+        return Image(cfi.FreeImage_Clone(self._dib))
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
@@ -89,9 +89,9 @@ def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
         bmask (int): Bit layout of the blue component.
         fitype (int): Type of the image (one of the ``FIT_*`` constants).
     Returns:
-        A new instance of :class:`pyfreeimage.bitmap.Bitmap`.
+        A new instance of :class:`pyfreeimage.image.Image`.
 
     """
     dib = cfi.FreeImage_AllocateT(fitype, width, height, bpp,
                                     rmask, gmask, bmask)
-    return Bitmap(dib)
+    return Image(dib)

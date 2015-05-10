@@ -15,13 +15,13 @@ def test():
         old_unload(dib)
     cfi.FreeImage_Unload = new_unload
 
-    # Decorate Bitmap.__init__
-    old_init = fi.Bitmap.__init__
+    # Decorate Image.__init__
+    old_init = fi.Image.__init__
     def new_init(self, dib):
         assert dib not in allocated
         allocated.add(dib)
         old_init(self, dib)
-    fi.Bitmap.__init__ = new_init
+    fi.Image.__init__ = new_init
 
     for i in range(100):
         a = fi.empty(640, 480, 8)
@@ -31,4 +31,4 @@ def test():
 
     # Restore undecorated functions
     cfi.FreeImage_Unload = old_unload
-    fi.Bitmap.__init__ = old_init
+    fi.Image.__init__ = old_init

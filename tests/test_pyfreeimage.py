@@ -26,13 +26,13 @@ def pytest_generate_tests(metafunc):
 
 
 def test_load(name, fitype, palette_size, bpp, width, height):
-    bitmap = pyfi.io.load(name)
-    assert bitmap.fitype == fitype
-    assert bitmap.palette_size == palette_size
-    assert bitmap.bpp == bpp
-    assert bitmap.width == width
-    assert bitmap.height == height
-    assert bitmap.line == (bitmap.width * bitmap.bpp) // 8
+    image = pyfi.io.load(name)
+    assert image.fitype == fitype
+    assert image.palette_size == palette_size
+    assert image.bpp == bpp
+    assert image.width == width
+    assert image.height == height
+    assert image.line == (image.width * image.bpp) // 8
 
 
 def test_copy():

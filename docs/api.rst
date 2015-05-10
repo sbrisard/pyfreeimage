@@ -1,10 +1,10 @@
 API of the library
 ==================
 
-API of module `bitmap`
+API of module `image`
 ----------------------
 
-.. automodule:: pyfreeimage.bitmap
+.. automodule:: pyfreeimage.image
    :members:
 
 API of module `io`
