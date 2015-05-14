@@ -6,19 +6,19 @@ from weakref import finalize
 from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
-fidt = {FIDT_BYTE: ctypes.c_uint8,
-        FIDT_SHORT: ctypes.c_uint16,
-        FIDT_LONG: ctypes.c_uint32,
-        FIDT_SBYTE: ctypes.c_int8,
-        FIDT_UNDEFINED: ctypes.c_byte,
-        FIDT_SSHORT: ctypes.c_int16,
-        FIDT_SLONG: ctypes.c_int32,
-        FIDT_FLOAT: ctypes.c_float,
-        FIDT_DOUBLE: ctypes.c_double,
-        FIDT_IFD: ctypes.c_uint32,
-        FIDT_LONG8: ctypes.c_uint64,
-        FIDT_SLONG8: ctypes.c_int64,
-        FIDT_IFD8: ctypes.c_uint64}
+type_map = {FIDT_BYTE: ctypes.c_uint8,
+            FIDT_SHORT: ctypes.c_uint16,
+            FIDT_LONG: ctypes.c_uint32,
+            FIDT_SBYTE: ctypes.c_int8,
+            FIDT_UNDEFINED: ctypes.c_byte,
+            FIDT_SSHORT: ctypes.c_int16,
+            FIDT_SLONG: ctypes.c_int32,
+            FIDT_FLOAT: ctypes.c_float,
+            FIDT_DOUBLE: ctypes.c_double,
+            FIDT_IFD: ctypes.c_uint32,
+            FIDT_LONG8: ctypes.c_uint64,
+            FIDT_SLONG8: ctypes.c_int64,
+            FIDT_IFD8: ctypes.c_uint64}
 
 class Tag:
     def __init__(self, ptag=None):
@@ -62,7 +62,7 @@ class Tag:
         tag_type = self.type
         tag_value = cfi.FreeImage_GetTagValue(self._tag)
         try:
-            return_type = fidt[tag_type]
+            return_type = type_map[tag_type]
             if self.count > 1:
                 return_type = return_type*self.count
             return return_type.from_address(tag_value)
