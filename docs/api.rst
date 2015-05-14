@@ -12,3 +12,10 @@ API of module `io`
 
 .. automodule:: pyfreeimage.io
    :members:
+
+
+API of module `metadata`
+------------------------
+
+.. automodule:: pyfreeimage.metadata
+   :members:
