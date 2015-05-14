@@ -24,6 +24,8 @@ type_map = {FIDT_BYTE: ctypes.c_uint8,
             FIDT_IFD8: ctypes.c_uint64}
 
 class Tag:
+    """TODO"""
+
     def __init__(self, ptag=None):
         self._tag = ptag
         #finalize(self, cfi.FreeImage_DeleteTag, self._tag)
@@ -53,15 +55,20 @@ class Tag:
         return cfi.FreeImage_GetTagType(self._tag)
 
     @property
-    def count(self):
-        return cfi.FreeImage_GetTagCount(self._tag)
-
-    @property
     def length(self):
-        return cfi.FreeImage_GetTagLength(self._tag)
+        """The length of the array returned by :func:`Tag.value`."""
+        tag_type = cfi.FreeImage_GetTagType(self._tag)
+        tag_count = cfi.FreeImage_GetTagCount(self._tag)
+        if (tag_type == FIDT_RATIONAL) or (tag_type == FIDT_SRATIONAL):
+            return 2*tag_count
+        elif (tag_type == FIDT_PALETTE):
+            return 4*tag_count
+        else:
+            return tag_count
 
     @property
     def value(self):
+        """TODO"""
         tag_type = self.type
         tag_value = cfi.FreeImage_GetTagValue(self._tag)
 
@@ -70,11 +77,7 @@ class Tag:
             return ctypes.cast(tag_value, c_char_p).value
 
         # Return a ctypes array in all other cases
-        length = self.count
-        if (tag_type == FIDT_RATIONAL) or (tag_type == FIDT_SRATIONAL):
-            length *= 2
-        elif (tag_type == FIDT_PALETTE):
-            length *= 4
+        length = self.length
         return_type = type_map[tag_type]
         if length > 1:
             return_type = return_type*length
