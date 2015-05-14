@@ -69,6 +69,9 @@ class Tag:
         except KeyError:
             if tag_type == FIDT_ASCII:
                 return ctypes.cast(tag_value, c_char_p).value
+            elif tag_type == FIDT_RATIONAL:
+                return_type = ctypes.c_uint32*(2*self.count)
+                return return_type.from_address(tag_value)
             else:
                 raise NotImplementedError('Cannot compute value of '
                                           'tag type {}'.format(tag_type))
