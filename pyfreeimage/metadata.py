@@ -6,19 +6,19 @@ from weakref import finalize
 from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
-fidt = {FIDT_BYTE: ctypes.c_ubyte,
-        FIDT_SHORT: ctypes.c_ushort,
-        FIDT_LONG: ctypes.c_ulong,
-        FIDT_SBYTE: ctypes.c_byte,
+fidt = {FIDT_BYTE: ctypes.c_uint8,
+        FIDT_SHORT: ctypes.c_uint16,
+        FIDT_LONG: ctypes.c_uint32,
+        FIDT_SBYTE: ctypes.c_int8,
         FIDT_UNDEFINED: ctypes.c_byte,
-        FIDT_SSHORT: ctypes.c_short,
-        FIDT_SLONG: ctypes.c_long,
+        FIDT_SSHORT: ctypes.c_int16,
+        FIDT_SLONG: ctypes.c_int32,
         FIDT_FLOAT: ctypes.c_float,
         FIDT_DOUBLE: ctypes.c_double,
-        FIDT_IFD: ctypes.c_ulong,
-        FIDT_LONG8: ctypes.c_ulonglong,
-        FIDT_SLONG8: ctypes.c_longlong,
-        FIDT_IFD8: ctypes.c_ulonglong}
+        FIDT_IFD: ctypes.c_uint32,
+        FIDT_LONG8: ctypes.c_uint64,
+        FIDT_SLONG8: ctypes.c_int64,
+        FIDT_IFD8: ctypes.c_uint64}
 
 class Tag:
     def __init__(self, ptag=None):
