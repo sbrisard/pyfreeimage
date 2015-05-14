@@ -6,8 +6,19 @@ from weakref import finalize
 from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
-fidt = {FIDT_BYTE: ctypes.c_byte,
-        FIDT_ASCII: ctypes.c_byte}
+fidt = {FIDT_BYTE: ctypes.c_ubyte,
+        FIDT_SHORT: ctypes.c_ushort,
+        FIDT_LONG: ctypes.c_ulong,
+        FIDT_SBYTE: ctypes.c_byte,
+        FIDT_UNDEFINED: ctypes.c_byte,
+        FIDT_SSHORT: ctypes.c_short,
+        FIDT_SLONG: ctypes.c_long,
+        FIDT_FLOAT: ctypes.c_float,
+        FIDT_DOUBLE: ctypes.c_double,
+        FIDT_IFD: ctypes.c_ulong,
+        FIDT_LONG8: ctypes.c_ulonglong,
+        FIDT_SLONG8: ctypes.c_longlong,
+        FIDT_IFD8: ctypes.c_ulonglong}
 
 class Tag:
     def __init__(self, ptag=None):
@@ -48,10 +59,14 @@ class Tag:
 
     @property
     def value(self):
-        type = self.type
-        data = cfi.FreeImage_GetTagValue(self._tag)
-        if type == FIDT_ASCII:
-            return cast(cfi.FreeImage_GetTagValue(self._tag), c_char_p).value
-        else:
-            raise NotImplementedError('Cannot compute value of'
-                                      'tag type {}'.format(type))
+        tag_type = self.type
+        tag_value = cfi.FreeImage_GetTagValue(self._tag)
+        try:
+            ArrayType = fidt[tag_type]
+            return ArrayType.from_address(tag_value)
+        except KeyError:
+            if tag_type == FIDT_ASCII:
+                return ctypes.cast(tag_value, c_char_p).value
+            else:
+                raise NotImplementedError('Cannot compute value of '
+                                          'tag type {}'.format(tag_type))
