@@ -62,8 +62,10 @@ class Tag:
         tag_type = self.type
         tag_value = cfi.FreeImage_GetTagValue(self._tag)
         try:
-            ArrayType = fidt[tag_type]
-            return ArrayType.from_address(tag_value)
+            return_type = fidt[tag_type]
+            if self.count > 1:
+                return_type = return_type*self.count
+            return return_type.from_address(tag_value)
         except KeyError:
             if tag_type == FIDT_ASCII:
                 return ctypes.cast(tag_value, c_char_p).value
