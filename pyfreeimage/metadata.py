@@ -91,3 +91,17 @@ class Tag:
         if length > 1:
             return_type = return_type*length
         return return_type.from_address(tag_value)
+
+    def __str__(self):
+        if self.mdmodel is not None:
+            return cfi.FreeImage_TagToString(self.mdmodel,
+                                             self._c_tag, None).decode()
+        elif self.type == FIDT_ASCII:
+            return self.value.decode()
+        elif self.length == 1:
+            return str(self.value)
+        else:
+            return str(list(self.value))
+
+    def __repr__(self):
+        return 'Tag({}, {})'.format(self._c_tag, self.mdmodel)
