@@ -24,15 +24,24 @@ type_map = {FIDT_BYTE: ctypes.c_uint8,
             FIDT_IFD8: ctypes.c_uint64}
 
 class Tag:
-    """TODO"""
+    """Class that represents one tag of an image.
 
-    def __init__(self, ptag=None):
+    The constructor of this class should not be called directly.
+
+    Args:
+        ptag (int): Pointer to the underlying FreeImage structure.
+        mdmodel (int): metadata model to which the tag belongs; one of
+                       the ``FIMD_*`` constants.
+    """
+
+    def __init__(self, ptag, mdmodel=None):
         self._c_tag = ptag
+        self.mdmodel = mdmodel
         #finalize(self, cfi.FreeImage_DeleteTag, self._c_tag)
 
     def copy(self):
         """Return a deep copy of the tag."""
-        return Tag(cfi.FreeImage_CloneTag(self._c_tag))
+        return Tag(cfi.FreeImage_CloneTag(self._c_tag), self.mdmodel)
 
     @property
     def key(self):
