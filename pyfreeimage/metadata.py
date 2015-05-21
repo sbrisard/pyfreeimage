@@ -64,16 +64,9 @@ class Tag:
         return cfi.FreeImage_GetTagType(self._c_tag)
 
     @property
-    def length(self):
-        """The length of the array returned by :func:`Tag.value`."""
-        tag_type = cfi.FreeImage_GetTagType(self._c_tag)
-        tag_count = cfi.FreeImage_GetTagCount(self._c_tag)
-        if (tag_type == FIDT_RATIONAL) or (tag_type == FIDT_SRATIONAL):
-            return 2*tag_count
-        elif (tag_type == FIDT_PALETTE):
-            return 4*tag_count
-        else:
-            return tag_count
+    def count(self):
+        """The number of values of type :func:`Tag.type`."""
+        return cfi.FreeImage_GetTagCount(self._c_tag)
 
     @property
     def value(self):
