@@ -45,7 +45,7 @@ class Tag:
 
     @property
     def key(self):
-        """The tag field name (unique inside a metadata model)."""
+        """The tag field name."""
         return cfi.FreeImage_GetTagKey(self._c_tag)
 
     @property
@@ -60,7 +60,7 @@ class Tag:
 
     @property
     def type(self):
-        """The data type."""
+        """The data type; one of the ``FIDT_*`` constants."""
         return cfi.FreeImage_GetTagType(self._c_tag)
 
     @property
