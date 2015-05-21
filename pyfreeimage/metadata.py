@@ -7,6 +7,7 @@ from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
 type_map = {FIDT_BYTE: ctypes.c_uint8,
+            FIDT_ASCII: ctypes.c_char,
             FIDT_SHORT: ctypes.c_uint16,
             FIDT_LONG: ctypes.c_uint32,
             FIDT_RATIONAL: ctypes.c_uint32,
@@ -70,29 +71,42 @@ class Tag:
 
     @property
     def value(self):
-        """TODO"""
+        """Return a ``ctypes`` array of values.
+
+        The length of the returned array depends on the tag type
+
+          - ``FIDT_ASCII``: the length is the tag count minus one (as the
+            string is NULL terminated),
+          - ``FIDT_RATIONAL``, ``FIDT_SRATIONAL``: the length is
+            twice the tag count,
+          - ``FIDT_PALETTE``: the length is four times the tag count,
+          - in all other cases, the length is equal to the tag count.
+
+        If the tag type is ``FIDT_ASCII``, the following code will return
+        the corresponding bytes string::
+
+            bytes(tag.value)
+
+        See also:
+            :func:`Tag.type`, :func:`Tag.count`.
+        """
         tag_type = self.type
-        tag_value = cfi.FreeImage_GetTagValue(self._c_tag)
-
-        # If FIDT_ASCII, return a string
-        if tag_type == FIDT_ASCII:
-            return ctypes.cast(tag_value, c_char_p).value
-
-        # Return a ctypes array in all other cases
-        length = self.length
-        return_type = type_map[tag_type]
-        if length > 1:
-            return_type = return_type*length
-        return return_type.from_address(tag_value)
+        length = self.count
+        if (tag_type == FIDT_ASCII):
+            length -= 1
+        elif (tag_type == FIDT_RATIONAL) or (tag_type == FIDT_SRATIONAL):
+            length *= 2
+        elif (tag_type == FIDT_PALETTE):
+            length *= 4
+        return_type = type_map[tag_type]*length
+        return return_type.from_address(cfi.FreeImage_GetTagValue(self._c_tag))
 
     def __str__(self):
         if self.mdmodel is not None:
             return cfi.FreeImage_TagToString(self.mdmodel,
                                              self._c_tag, None).decode()
         elif self.type == FIDT_ASCII:
-            return self.value.decode()
-        elif self.length == 1:
-            return str(self.value)
+            return bytes(self.value).decode()
         else:
             return str(list(self.value))
 
