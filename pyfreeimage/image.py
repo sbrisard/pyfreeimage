@@ -1,5 +1,9 @@
+import ctypes
 import functools
 import operator
+
+from pyfreeimage.constants import FIMD_EXIF_MAIN
+from pyfreeimage.metadata import Tag
 
 try:
     from weakref import finalize
@@ -71,6 +75,27 @@ class Image:
     def copy(self):
         """Return a deep copy of the image."""
         return Image(cfi.FreeImage_Clone(self._dib))
+
+    def tag(self, key, mdmodel=FIMD_EXIF_MAIN):
+        """Return a tag attached to the image.
+
+        Args:
+            key (str): Metadata field name.
+            mdmodel (int): Metadata model; one of the ``FIMD_*`` constants
+                (default: ``FIMD_EXIF_MAIN``).
+        Returns:
+            A new Tag instance.
+        Return Type:
+            :class:`pyfreeimage.metadata.Tag`
+        """
+        if isinstance(key, str):
+            key = key.encode()
+        ptag = ctypes.c_void_p()
+        if cfi.FreeImage_GetMetadata(mdmodel, self._dib, key,
+                                     ctypes.byref(ptag)):
+            return Tag(ptag, mdmodel)
+        else:
+            return None
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
