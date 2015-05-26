@@ -82,7 +82,7 @@ class Image:
         Args:
             key (str): Metadata field name.
             mdmodel (int): Metadata model; one of the ``FIMD_*`` constants
-                (default: ``FIMD_EXIF_MAIN``).
+                (defaults to ``FIMD_EXIF_MAIN``).
         Returns:
             A new Tag instance.
         Return Type:
@@ -96,6 +96,24 @@ class Image:
             return Tag(ptag, mdmodel)
         else:
             return None
+
+    def tags(self, mdmodel=FIMD_EXIF_MAIN):
+        """Return a generator function over the tags of the image.
+
+        Args:
+            mdmodel (int): Metadata model; one of the ``FIMD_*`` constants
+                (defaults to ``FIMD_EXIF_MAIN``).
+        Returns:
+            A generator function.
+
+        """
+        tag  = Tag(ctypes.c_void_p(), mdmodel)
+        pptag = ctypes.byref(tag._c_tag)
+        mdhandle = cfi.FreeImage_FindFirstMetadata(mdmodel, self._dib, pptag)
+        yield tag.copy()
+        while cfi.FreeImage_FindNextMetadata(mdhandle, pptag):
+            yield tag.copy()
+        cfi.FreeImage_FindCloseMetadata(mdhandle)
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
