@@ -84,9 +84,8 @@ class Image:
             mdmodel (int): Metadata model; one of the ``FIMD_*`` constants
                 (defaults to ``FIMD_EXIF_MAIN``).
         Returns:
-            A new Tag instance.
-        Return Type:
-            :class:`pyfreeimage.metadata.Tag`
+            Tag: A new Tag instance.
+
         """
         if isinstance(key, str):
             key = key.encode()
@@ -132,7 +131,7 @@ def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
         bmask (int): Bit layout of the blue component.
         fitype (int): Type of the image (one of the ``FIT_*`` constants).
     Returns:
-        A new instance of :class:`pyfreeimage.image.Image`.
+        Image: A new image instance.
 
     """
     dib = cfi.FreeImage_AllocateT(fitype, width, height, bpp,
