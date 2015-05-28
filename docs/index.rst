@@ -13,6 +13,7 @@ Contents:
 
    installation
    api
+   developers
 
 Indices and tables
 ==================
