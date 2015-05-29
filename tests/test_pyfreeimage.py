@@ -4,14 +4,10 @@ import os.path
 import pytest
 
 import pyfreeimage as pyfi
-
+import tstutil
 
 PATH_TO_IMAGES = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               'images')
-
-
-def load_metro_tiff():
-    return pyfi.io.load(os.path.join(PATH_TO_IMAGES, 'metro.tif'))
 
 
 def pytest_generate_tests(metafunc):
@@ -36,7 +32,7 @@ def test_load(name, fitype, palette_size, bpp, width, height):
 
 
 def test_copy():
-    img1 = load_metro_tiff()
+    img1 = tstutil.load_image('5.2.10.tiff')
     img2 = img1.copy()
     assert img1 is not img2
     assert img1._dib != img2._dib
