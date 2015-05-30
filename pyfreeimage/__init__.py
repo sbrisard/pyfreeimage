@@ -1,3 +1,12 @@
+"""pyfreeimage is a set of ctypes bindings to the FreeImage library.
+
+Attributes:
+    __copyright_message__ (str): The copyright message of the FreeImage
+        library.
+    __fi_version__ (str): The version of the FreeImage library this
+        module is wrapped around.
+"""
+
 import pyfreeimage.io
 
 from pyfreeimage.image import Image, empty

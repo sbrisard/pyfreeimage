@@ -1,6 +1,12 @@
 API of the library
 ==================
 
+API of module :mod:`pyfreeimage`
+--------------------------------
+
+.. automodule:: pyfreeimage
+   :members:
+
 API of module :mod:`pyfreeimage.image`
 --------------------------------------
 
