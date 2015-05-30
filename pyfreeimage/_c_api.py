@@ -48,6 +48,3 @@ init_signature('FindCloseMetadata', None, [c_void_p])
 init_signature('GetMetadata', c_bool, [c_int, c_void_p, c_char_p, c_void_p_p])
 init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
 init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
-
-__copyright_message__ = cfi.FreeImage_GetCopyrightMessage().decode('ascii')
-__fi_version__ = cfi.FreeImage_GetVersion().decode('ascii')
