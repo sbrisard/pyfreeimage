@@ -1,7 +1,7 @@
 .. -*- coding: utf-8 -*-
 
-Correspondence between C and Python functions
-=============================================
+Dashboard
+=========
 
 The present page lists the original C functions defined in the API doc of FreeImage, as well as their Python counterpart. The tables below give an accurate image of the project advancement.
 
