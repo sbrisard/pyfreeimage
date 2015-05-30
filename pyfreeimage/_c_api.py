@@ -50,4 +50,4 @@ init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
 init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
 
 __copyright_message__ = cfi.FreeImage_GetCopyrightMessage().decode('ascii')
-__version__ = cfi.FreeImage_GetVersion().decode('ascii')
+__fi_version__ = cfi.FreeImage_GetVersion().decode('ascii')
