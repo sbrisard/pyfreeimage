@@ -6,29 +6,20 @@ import pytest
 import pyfreeimage as pyfi
 import tstutil
 
-PATH_TO_IMAGES = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                              'images')
 
-
-def pytest_generate_tests(metafunc):
-    if metafunc.function == test_load:
-        files = glob.glob(os.path.join(PATH_TO_IMAGES, 'metro*'))
-        params = [(name, pyfi.FIT_BITMAP,
-                   0 if name.find('gray') == -1 else 256,
-                   24 if name.find('gray') == -1 else 8,
-                   320, 200) for name in files]
-        metafunc.parametrize('name, fitype, palette_size, bpp, width, height',
-                             params)
-
-
-def test_load(name, fitype, palette_size, bpp, width, height):
-    image = pyfi.io.load(name)
-    assert image.fitype == fitype
-    assert image.palette_size == palette_size
-    assert image.bpp == bpp
-    assert image.width == width
-    assert image.height == height
-    assert image.line == (image.width * image.bpp) // 8
+@pytest.mark.parametrize('img_name, prop_name, expected',
+                         [('kochtreffen.jpg', 'fitype', pyfi.FIT_BITMAP),
+                          ('kochtreffen.jpg', 'palette_size', 0),
+                          ('kochtreffen.jpg', 'bpp', 24),
+                          ('kochtreffen.jpg', 'width', 320),
+                          ('kochtreffen.jpg', 'height', 200),
+                          ('kochtreffen.jpg', 'line', 320*3),
+                          ('kochtreffen.jpg', 'pitch', 320*3),
+                         ])
+def test_property(img_name, prop_name, expected):
+    img = tstutil.load_image(img_name)
+    actual = getattr(img, prop_name)
+    assert actual == expected
 
 
 def test_copy():
