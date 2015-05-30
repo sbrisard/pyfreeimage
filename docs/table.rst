@@ -13,15 +13,15 @@ Bitmap functions
 General functions
 ^^^^^^^^^^^^^^^^^
 
-============================= ======
+============================= =========================================
 C                             Python
-============================= ======
-FreeImage_Initialise
-FreeImage_DeInitialise
-FreeImage_GetVersion
-FreeImage_GetCopyrightMessage
-FreeImage_SetOutputMessage
-============================= ======
+============================= =========================================
+FreeImage_Initialise          Not needed [#fn1]_
+FreeImage_DeInitialise        Not needed [#fn1]_
+FreeImage_GetVersion          :data:`pyfreeimage.__version__`
+FreeImage_GetCopyrightMessage :data:`pyfreeimage.__copyright_message__`
+FreeImage_SetOutputMessage    Not implemented
+============================= =========================================
 
 
 Bitmap management functions
@@ -447,3 +447,7 @@ C                                Python
 ================================ ======
 FreeImage_MultigridPoissonSolver
 ================================ ======
+
+.. rubric:: Footnotes
+
+.. [#fn1] Automatically called when using the dynamic version of the library.
