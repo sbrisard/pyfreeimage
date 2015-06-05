@@ -1,10 +1,15 @@
 import ctypes
+import ctypes.util
 
 from ctypes import c_bool, c_char_p, c_int, c_uint, c_uint16, c_uint32, c_void_p
 
 c_void_p_p = ctypes.POINTER(c_void_p)
 
-cfi = ctypes.cdll.LoadLibrary('/opt/local/lib/libfreeimage.dylib')
+path_to_cfi = ctypes.util.find_library('freeimage')
+if path_to_cfi is not None:
+    cfi = ctypes.cdll.LoadLibrary(path_to_cfi)
+else:
+    raise RuntimeError('Could not locate the FreeImage shared library.')
 
 def init_signature(func_name, restype=c_uint, argtypes=[c_void_p]):
     global cfi
