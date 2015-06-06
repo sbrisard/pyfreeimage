@@ -17,6 +17,10 @@ def init_signature(func_name, restype, argtypes):
     f.restype = restype
     f.argtypes = argtypes
 
+# ***********************
+# Definition of the C API
+# ***********************
+
 # Bitmap functions
 # ================
 
