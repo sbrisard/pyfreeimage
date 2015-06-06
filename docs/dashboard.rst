@@ -31,11 +31,11 @@ FreeImage_SetOutputMessage    Not implemented
 Bitmap management functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-======================== ======
+======================== ===============================
 C                        Python
-======================== ======
-FreeImage_Allocate
-FreeImage_AllocateT
+======================== ===============================
+FreeImage_Allocate       Not implemented
+FreeImage_AllocateT      :func:`pyfreeimage.image.empty`
 FreeImage_Load
 FreeImage_LoadU
 FreeImage_LoadFromHandle
@@ -44,7 +44,7 @@ FreeImage_SaveU
 FreeImage_SaveToHandle
 FreeImage_Clone
 FreeImage_Unload
-======================== ======
+======================== ===============================
 
 
 Bitmap information functions

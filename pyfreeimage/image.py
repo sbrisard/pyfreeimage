@@ -135,5 +135,5 @@ def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
 
     """
     dib = cfi.FreeImage_AllocateT(fitype, width, height, bpp,
-                                    rmask, gmask, bmask)
+                                  rmask, gmask, bmask)
     return Image(dib)

@@ -6,6 +6,8 @@ import pytest
 import pyfreeimage as pyfi
 import tstutil
 
+from pyfreeimage.constants import *
+from pyfreeimage.image import empty
 
 @pytest.mark.parametrize('img_name, prop_name, expected',
                          [('kochtreffen.jpg', 'fitype', pyfi.FIT_BITMAP),
@@ -31,3 +33,14 @@ def test_copy():
     assert img1.width == img2.width
     assert img1.height == img2.height
     assert img1.bpp == img2.bpp
+
+
+@pytest.mark.parametrize('width, height, bpp, rmask, gmask, bmask, fitype',
+                         [(320, 200, 24, 0, 0, 0, FIT_BITMAP),
+                          (320, 200, 64, 0, 0, 0, FIT_DOUBLE)])
+def test_empty(width, height, bpp, rmask, gmask, bmask, fitype):
+    img = empty(width, height, bpp, rmask, gmask, bmask, fitype)
+    assert img.width == width
+    assert img.height == height
+    assert img.bpp == bpp
+    assert img.fitype == fitype
