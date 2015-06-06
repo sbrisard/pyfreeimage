@@ -36,7 +36,7 @@ C                        Python
 ======================== ===============================
 FreeImage_Allocate       Not implemented
 FreeImage_AllocateT      :func:`pyfreeimage.image.empty`
-FreeImage_Load
+FreeImage_Load           :func:`pyfreeimage.io.load`
 FreeImage_LoadU
 FreeImage_LoadFromHandle
 FreeImage_Save
