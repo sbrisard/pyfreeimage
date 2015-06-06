@@ -39,7 +39,7 @@ FreeImage_AllocateT      :func:`pyfreeimage.image.empty`
 FreeImage_Load           :func:`pyfreeimage.io.load`
 FreeImage_LoadU          Not implemented [#fn2]_
 FreeImage_LoadFromHandle Not implemented
-FreeImage_Save
+FreeImage_Save           :func:`pyfreeimage.io.save`
 FreeImage_SaveU          Not implemented [#fn2]_
 FreeImage_SaveToHandle   Not implemented
 FreeImage_Clone          :func:`pyfreeimage.image.Image.copy`

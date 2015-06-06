@@ -45,4 +45,4 @@ def save(filename, image, fif, flags=0):
     """
     if isinstance(filename, str):
         filename = filename.encode()
-    cfi.FreeImage_Save(fif.value, self._dib, filename, flags)
+    cfi.FreeImage_Save(fif, image._dib, filename, flags)
