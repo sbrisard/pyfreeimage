@@ -31,20 +31,20 @@ FreeImage_SetOutputMessage    Not implemented
 Bitmap management functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-======================== ===============================
+======================== ====================================
 C                        Python
-======================== ===============================
+======================== ====================================
 FreeImage_Allocate       Not implemented
 FreeImage_AllocateT      :func:`pyfreeimage.image.empty`
 FreeImage_Load           :func:`pyfreeimage.io.load`
-FreeImage_LoadU
-FreeImage_LoadFromHandle
+FreeImage_LoadU          Not implemented [#fn2]_
+FreeImage_LoadFromHandle Not implemented
 FreeImage_Save
-FreeImage_SaveU
-FreeImage_SaveToHandle
-FreeImage_Clone
-FreeImage_Unload
-======================== ===============================
+FreeImage_SaveU          Not implemented [#fn2]_
+FreeImage_SaveToHandle   Not implemented
+FreeImage_Clone          :func:`pyfreeimage.image.Image.copy`
+FreeImage_Unload         Not exposed [#fn3]_
+======================== ====================================
 
 
 Bitmap information functions
@@ -455,3 +455,7 @@ FreeImage_MultigridPoissonSolver
 .. rubric:: Footnotes
 
 .. [#fn1] Automatically called when using the dynamic version of the library.
+.. [#fn2] Works on MS Windows only: a test on the platform should be
+          implemented.
+.. [#fn3] This function is automatically called on object destruction by means
+          of weak references (see also :ref:`memory-leaks`)

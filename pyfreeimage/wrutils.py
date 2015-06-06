@@ -1,5 +1,7 @@
 '''
-A simple replacement for the `weakref.finalize` object, new in Python 3.4.
+A replacement for the `weakref.finalize` object, new in Python 3.4.
+
+This code has not been extensively tested.
 
 Largely inspired from Benjamin Peterson's `Calling (C-level) finalizers without __del__ (Python recipe) <http://code.activestate.com/recipes/577242-calling-c-level-finalizers-without-__del__/>`_.
 
