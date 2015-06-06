@@ -13,43 +13,43 @@ else:
 
 def init_signature(func_name, restype=c_uint, argtypes=[c_void_p]):
     global cfi
-    f = getattr(cfi, 'FreeImage_' + func_name)
+    f = getattr(cfi, func_name)
     f.restype = restype
     f.argtypes = argtypes
 
-init_signature('GetVersion', c_char_p, None)
-init_signature('GetCopyrightMessage', c_char_p, None)
-init_signature('GetFileType', c_int, [c_char_p, c_int])
-init_signature('AllocateT', c_void_p, [c_int, # type
-                                       c_int, c_int, # width, depth
-                                       c_int, # bpp
-                                       c_uint, c_uint, c_uint]) # RGB masks
-init_signature('GetImageType', c_int)
-init_signature('GetColorsUsed')
-init_signature('GetBPP')
-init_signature('GetWidth')
-init_signature('GetHeight')
-init_signature('GetLine')
-init_signature('GetPitch')
-init_signature('Load', c_void_p, [c_int, c_char_p, c_int])
-init_signature('Save', c_int, [c_int, c_void_p, c_char_p, c_int])
-init_signature('Clone', c_void_p, [c_void_p])
-init_signature('Unload', None, [c_void_p])
+init_signature('FreeImage_GetVersion', c_char_p, None)
+init_signature('FreeImage_GetCopyrightMessage', c_char_p, None)
+init_signature('FreeImage_GetFileType', c_int, [c_char_p, c_int])
+init_signature('FreeImage_AllocateT', c_void_p,
+               [c_int, c_int, c_int, c_int, c_uint, c_uint, c_uint])
+init_signature('FreeImage_GetImageType', c_int)
+init_signature('FreeImage_GetColorsUsed')
+init_signature('FreeImage_GetBPP')
+init_signature('FreeImage_GetWidth')
+init_signature('FreeImage_GetHeight')
+init_signature('FreeImage_GetLine')
+init_signature('FreeImage_GetPitch')
+init_signature('FreeImage_Load', c_void_p, [c_int, c_char_p, c_int])
+init_signature('FreeImage_Save', c_int, [c_int, c_void_p, c_char_p, c_int])
+init_signature('FreeImage_Clone', c_void_p, [c_void_p])
+init_signature('FreeImage_Unload', None, [c_void_p])
 
-init_signature('CreateTag', c_void_p, [])
-init_signature('DeleteTag', None)
-init_signature('CloneTag', c_void_p)
-init_signature('GetTagKey', c_char_p)
-init_signature('GetTagDescription', c_char_p)
-init_signature('GetTagID', c_uint16)
-init_signature('GetTagType', c_int)
-init_signature('GetTagCount', c_uint32)
-init_signature('GetTagLength', c_uint32)
-init_signature('GetTagValue', c_void_p)
+init_signature('FreeImage_CreateTag', c_void_p, [])
+init_signature('FreeImage_DeleteTag', None)
+init_signature('FreeImage_CloneTag', c_void_p)
+init_signature('FreeImage_GetTagKey', c_char_p)
+init_signature('FreeImage_GetTagDescription', c_char_p)
+init_signature('FreeImage_GetTagID', c_uint16)
+init_signature('FreeImage_GetTagType', c_int)
+init_signature('FreeImage_GetTagCount', c_uint32)
+init_signature('FreeImage_GetTagLength', c_uint32)
+init_signature('FreeImage_GetTagValue', c_void_p)
 
-init_signature('FindFirstMetadata', c_void_p, [c_int, c_void_p, c_void_p_p])
-init_signature('FindNextMetadata', c_bool, [c_void_p, c_void_p_p])
-init_signature('FindCloseMetadata', None, [c_void_p])
-init_signature('GetMetadata', c_bool, [c_int, c_void_p, c_char_p, c_void_p_p])
-init_signature('GetMetadataCount', c_uint, [c_int, c_void_p])
-init_signature('TagToString', c_char_p, [c_int, c_void_p, c_char_p])
+init_signature('FreeImage_FindFirstMetadata', c_void_p,
+               [c_int, c_void_p, c_void_p_p])
+init_signature('FreeImage_FindNextMetadata', c_bool, [c_void_p, c_void_p_p])
+init_signature('FreeImage_FindCloseMetadata', None, [c_void_p])
+init_signature('FreeImage_GetMetadata', c_bool,
+               [c_int, c_void_p, c_char_p, c_void_p_p])
+init_signature('FreeImage_GetMetadataCount', c_uint, [c_int, c_void_p])
+init_signature('FreeImage_TagToString', c_char_p, [c_int, c_void_p, c_char_p])
