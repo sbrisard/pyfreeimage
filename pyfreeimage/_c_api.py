@@ -13,9 +13,9 @@ def _init_signature(func_name, restype, argtypes):
 c_void_p_p = ctypes.POINTER(c_void_p)
 
 # TODO Does this work under windows?
-path_to_cfi = ctypes.util.find_library('freeimage')
-if path_to_cfi is not None:
-    cfi = ctypes.cdll.LoadLibrary(path_to_cfi)
+_path_to_cfi = ctypes.util.find_library('freeimage')
+if _path_to_cfi is not None:
+    cfi = ctypes.cdll.LoadLibrary(_path_to_cfi)
 else:
     raise RuntimeError('Could not locate the FreeImage shared library.')
 
