@@ -39,7 +39,7 @@ class Image:
 
     @property
     def palette_size(self):
-        """Return the size of the palette (0 for high-color bitmaps.'"""
+        """Return the size of the palette (0 for high-color bitmaps)."""
         return cfi.FreeImage_GetColorsUsed(self._dib)
 
     @property
