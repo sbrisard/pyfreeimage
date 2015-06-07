@@ -2,7 +2,7 @@ from pyfreeimage._c_api import cfi
 from pyfreeimage.image import Image
 
 
-def get_file_format(filename, size=0):
+def file_format(filename, size=0):
     """Return the format (as a ``FIF_*`` constant) of the file.
 
     Args:
@@ -25,7 +25,7 @@ def load(filename, fif=None, flags=0):
     if isinstance(filename, str):
         filename = filename.encode()
     if fif is None:
-        fif = get_file_format(filename, 0)
+        fif = file_format(filename, 0)
     dib = cfi.FreeImage_Load(fif, filename, flags)
     if dib is None:
         # TODO Define new exception
