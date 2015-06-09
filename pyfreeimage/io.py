@@ -11,6 +11,8 @@ def file_format(filename, size=0):
     Returns:
         The format as an int.
     """
+    if isinstance(filename, str):
+        filename = filename.encode()
     return cfi.FreeImage_GetFileType(filename, size)
 
 

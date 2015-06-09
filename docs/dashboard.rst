@@ -50,55 +50,55 @@ FreeImage_Unload         Not exposed [#fn3]_
 Bitmap information functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-============================== ======
+============================== ============================================
 C                              Python
-============================== ======
-FreeImage_GetImageType
-FreeImage_GetColorsUsed
-FreeImage_GetBPP
-FreeImage_GetWidth
-FreeImage_GetHeight
-FreeImage_GetLine
-FreeImage_GetPitch
-FreeImage_GetDIBSize
-FreeImage_GetPalette
-FreeImage_GetDotsPerMeterX
-FreeImage_GetDotsPerMeterY
-FreeImage_SetDotsPerMeterX
-FreeImage_SetDotsPerMeterY
-FreeImage_GetInfoHeader
-FreeImage_GetInfo
-FreeImage_GetColorType
-FreeImage_GetRedMask
-FreeImage_GetGreenMask
-FreeImage_GetBlueMask
-FreeImage_GetTransparencyCount
-FreeImage_GetTransparencyTable
-FreeImage_SetTransparencyTable
-FreeImage_SetTransparent
-FreeImage_IsTransparent
-FreeImage_SetTransparentIndex
-FreeImage_GetTransparentIndex
-FreeImage_HasBackgroundColor
-FreeImage_GetBackgroundColor
-FreeImage_SetBackgroundColor
-FreeImage_HasPixels
-FreeImage_GetThumbnail
-FreeImage_SetThumbnail
-============================== ======
+============================== ============================================
+FreeImage_GetImageType         :attr:`pyfreeimage.image.Image.fitype`
+FreeImage_GetColorsUsed        :attr:`pyfreeimage.image.Image.palette_size`
+FreeImage_GetBPP               :attr:`pyfreeimage.image.Image.bpp`
+FreeImage_GetWidth             :attr:`pyfreeimage.image.Image.width`
+FreeImage_GetHeight            :attr:`pyfreeimage.image.Image.height`
+FreeImage_GetLine              :attr:`pyfreeimage.image.Image.line`
+FreeImage_GetPitch             :attr:`pyfreeimage.image.Image.pitch`
+FreeImage_GetDIBSize           Not implemented
+FreeImage_GetPalette           Not implemented
+FreeImage_GetDotsPerMeterX     Not implemented
+FreeImage_GetDotsPerMeterY     Not implemented
+FreeImage_SetDotsPerMeterX     Not implemented
+FreeImage_SetDotsPerMeterY     Not implemented
+FreeImage_GetInfoHeader        Not implemented
+FreeImage_GetInfo              Not implemented
+FreeImage_GetColorType         Not implemented
+FreeImage_GetRedMask           Not implemented
+FreeImage_GetGreenMask         Not implemented
+FreeImage_GetBlueMask          Not implemented
+FreeImage_GetTransparencyCount Not implemented
+FreeImage_GetTransparencyTable Not implemented
+FreeImage_SetTransparencyTable Not implemented
+FreeImage_SetTransparent       Not implemented
+FreeImage_IsTransparent        Not implemented
+FreeImage_SetTransparentIndex  Not implemented
+FreeImage_GetTransparentIndex  Not implemented
+FreeImage_HasBackgroundColor   Not implemented
+FreeImage_GetBackgroundColor   Not implemented
+FreeImage_SetBackgroundColor   Not implemented
+FreeImage_HasPixels            Not implemented
+FreeImage_GetThumbnail         Not implemented
+FreeImage_SetThumbnail         Not implemented
+============================== ============================================
 
 
 Filetype functions
 ^^^^^^^^^^^^^^^^^^
 
-=============================== ======
+=============================== ==================================
 C                               Python
-=============================== ======
-FreeImage_GetFileType
+=============================== ==================================
+FreeImage_GetFileType           :func:`pyfreeimage.io.file_format`
 FreeImage_GetFileTypeU
 FreeImage_GetFileTypeFromHandle
 FreeImage_GetFileTypeFromMemory
-=============================== ======
+=============================== ==================================
 
 
 Pixel access functions
