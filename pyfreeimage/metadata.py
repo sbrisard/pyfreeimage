@@ -8,23 +8,23 @@ from weakref import finalize
 from pyfreeimage._c_api import cfi as cfi
 from pyfreeimage.constants import *
 
-type_map = {FIDT_BYTE: ctypes.c_uint8,
-            FIDT_ASCII: ctypes.c_char,
-            FIDT_SHORT: ctypes.c_uint16,
-            FIDT_LONG: ctypes.c_uint32,
-            FIDT_RATIONAL: ctypes.c_uint32,
-            FIDT_SBYTE: ctypes.c_int8,
-            FIDT_UNDEFINED: ctypes.c_byte,
-            FIDT_SSHORT: ctypes.c_int16,
-            FIDT_SLONG: ctypes.c_int32,
-            FIDT_SRATIONAL: ctypes.c_int32,
-            FIDT_FLOAT: ctypes.c_float,
-            FIDT_DOUBLE: ctypes.c_double,
-            FIDT_IFD: ctypes.c_uint32,
-            FIDT_PALETTE: ctypes.c_uint8,
-            FIDT_LONG8: ctypes.c_uint64,
-            FIDT_SLONG8: ctypes.c_int64,
-            FIDT_IFD8: ctypes.c_uint64}
+_type_map = {FIDT_BYTE: ctypes.c_uint8,
+             FIDT_ASCII: ctypes.c_char,
+             FIDT_SHORT: ctypes.c_uint16,
+             FIDT_LONG: ctypes.c_uint32,
+             FIDT_RATIONAL: ctypes.c_uint32,
+             FIDT_SBYTE: ctypes.c_int8,
+             FIDT_UNDEFINED: ctypes.c_byte,
+             FIDT_SSHORT: ctypes.c_int16,
+             FIDT_SLONG: ctypes.c_int32,
+             FIDT_SRATIONAL: ctypes.c_int32,
+             FIDT_FLOAT: ctypes.c_float,
+             FIDT_DOUBLE: ctypes.c_double,
+             FIDT_IFD: ctypes.c_uint32,
+             FIDT_PALETTE: ctypes.c_uint8,
+             FIDT_LONG8: ctypes.c_uint64,
+             FIDT_SLONG8: ctypes.c_int64,
+             FIDT_IFD8: ctypes.c_uint64}
 
 class Tag:
     """Class that represents one tag of an image.
@@ -100,7 +100,7 @@ class Tag:
             length *= 2
         elif (tag_type == FIDT_PALETTE):
             length *= 4
-        return_type = type_map[tag_type]*length
+        return_type = _type_map[tag_type]*length
         return return_type.from_address(cfi.FreeImage_GetTagValue(self._c_tag))
 
     def __str__(self):
