@@ -1,3 +1,5 @@
+"""This module defines classes and function for the manipulation of tags."""
+
 import ctypes
 
 from ctypes import cast, c_byte, c_char_p, c_void_p
