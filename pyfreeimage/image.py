@@ -1,3 +1,5 @@
+"""This module defines the Image class and some basic related functions."""
+
 import ctypes
 import functools
 import operator
@@ -16,7 +18,7 @@ from pyfreeimage._c_api import cfi
 
 
 class Image:
-    """Class that represents all images.
+    """Class that represents an image.
 
     The constructor of this class should not be called directly. Use the
     following functions instead:
