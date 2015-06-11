@@ -1,3 +1,5 @@
+"""This module defines functions for image I/O."""
+
 from pyfreeimage._c_api import cfi
 from pyfreeimage.image import Image
 
