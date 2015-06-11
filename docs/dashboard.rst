@@ -95,174 +95,174 @@ Filetype functions
 C                               Python
 =============================== ==================================
 FreeImage_GetFileType           :func:`pyfreeimage.io.file_format`
-FreeImage_GetFileTypeU
-FreeImage_GetFileTypeFromHandle
-FreeImage_GetFileTypeFromMemory
+FreeImage_GetFileTypeU          Not implemented
+FreeImage_GetFileTypeFromHandle Not implemented
+FreeImage_GetFileTypeFromMemory Not implemented
 =============================== ==================================
 
 
 Pixel access functions
 ^^^^^^^^^^^^^^^^^^^^^^
 
-======================= ======
+======================= ===============
 C                       Python
-======================= ======
-FreeImage_GetBits
-FreeImage_GetScanLine
-FreeImage_GetPixelIndex
-FreeImage_GetPixelColor
-FreeImage_SetPixelIndex
-FreeImage_SetPixelColor
-======================= ======
+======================= ===============
+FreeImage_GetBits       Not implemented
+FreeImage_GetScanLine   Not implemented
+FreeImage_GetPixelIndex Not implemented
+FreeImage_GetPixelColor Not implemented
+FreeImage_SetPixelIndex Not implemented
+FreeImage_SetPixelColor Not implemented
+======================= ===============
 
 
 Conversion functions
 ^^^^^^^^^^^^^^^^^^^^
 
-=============================== ======
+=============================== ===============
 C                               Python
-=============================== ======
-FreeImage_ConvertTo4Bits
-FreeImage_ConvertTo8Bits
-FreeImage_ConvertToGreyscale
-FreeImage_ConvertTo16Bits555
-FreeImage_ConvertTo16Bits565
-FreeImage_ConvertTo24Bits
-FreeImage_ConvertTo32Bits
-FreeImage_ColorQuantize
-FreeImage_ColorQuantizeEx
-FreeImage_Threshold
-FreeImage_Dither
-FreeImage_ConvertFromRawBits
-FreeImage_ConvertToRawBits
-FreeImage_ConvertToStandardType
-FreeImage_ConvertToFloat
-FreeImage_ConvertToRGBF
-FreeImage_ConvertToUINT16
-FreeImage_ConvertToRGB16
-=============================== ======
+=============================== ===============
+FreeImage_ConvertTo4Bits        Not implemented
+FreeImage_ConvertTo8Bits        Not implemented
+FreeImage_ConvertToGreyscale    Not implemented
+FreeImage_ConvertTo16Bits555    Not implemented
+FreeImage_ConvertTo16Bits565    Not implemented
+FreeImage_ConvertTo24Bits       Not implemented
+FreeImage_ConvertTo32Bits       Not implemented
+FreeImage_ColorQuantize         Not implemented
+FreeImage_ColorQuantizeEx       Not implemented
+FreeImage_Threshold             Not implemented
+FreeImage_Dither                Not implemented
+FreeImage_ConvertFromRawBits    Not implemented
+FreeImage_ConvertToRawBits      Not implemented
+FreeImage_ConvertToStandardType Not implemented
+FreeImage_ConvertToFloat        Not implemented
+FreeImage_ConvertToRGBF         Not implemented
+FreeImage_ConvertToUINT16       Not implemented
+FreeImage_ConvertToRGB16        Not implemented
+=============================== ===============
 
 
 Tone mapping operators
 ^^^^^^^^^^^^^^^^^^^^^^
 
-========================= ======
+========================= ===============
 C                         Python
-========================= ======
-FreeImage_ToneMapping
-FreeImage_TmoDrago03
-FreeImage_TmoReinhard05
-FreeImage_TmoReinhard05Ex
-FreeImage_TmoFattal02
-========================= ======
+========================= ===============
+FreeImage_ToneMapping     Not implemented
+FreeImage_TmoDrago03      Not implemented
+FreeImage_TmoReinhard05   Not implemented
+FreeImage_TmoReinhard05Ex Not implemented
+FreeImage_TmoFattal02     Not implemented
+========================= ===============
 
 
 ICC profile functions
 ^^^^^^^^^^^^^^^^^^^^^
 
-=========================== ======
+=========================== ===============
 C                           Python
-=========================== ======
-FreeImage_GetICCProfile
-FreeImage_CreateICCProfile
-FreeImage_DestroyICCProfile
-=========================== ======
+=========================== ===============
+FreeImage_GetICCProfile     Not implemented
+FreeImage_CreateICCProfile  Not implemented
+FreeImage_DestroyICCProfile Not implemented
+=========================== ===============
 
 
 Plugin functions
 ^^^^^^^^^^^^^^^^
 
-================================ ======
+================================ ===============
 C                                Python
-================================ ======
-FreeImage_GetFIFCount
-FreeImage_SetPluginEnabled
-FreeImage_IsPluginEnabled
-FreeImage_GetFIFFromFormat
-FreeImage_GetFIFFromMime
-FreeImage_GetFIFMimeType
-FreeImage_GetFormatFromFIF
-FreeImage_GetFIFExtensionList
-FreeImage_GetFIFDescription
-FreeImage_GetFIFRegExpr
-FreeImage_GetFIFFromFilename
-FreeImage_GetFIFFromFilenameU
-FreeImage_FIFSupportsReading
-FreeImage_FIFSupportsWriting
-FreeImage_FIFSupportsExportType
-FreeImage_FIFSupportsExportBPP
-FreeImage_FIFSupportsICCProfiles
-FreeImage_FIFSupportsNoPixels
-FreeImage_RegisterLocalPlugin
-FreeImage_RegisterExternalPlugin
-================================ ======
+================================ ===============
+FreeImage_GetFIFCount            Not implemented
+FreeImage_SetPluginEnabled       Not implemented
+FreeImage_IsPluginEnabled        Not implemented
+FreeImage_GetFIFFromFormat       Not implemented
+FreeImage_GetFIFFromMime         Not implemented
+FreeImage_GetFIFMimeType         Not implemented
+FreeImage_GetFormatFromFIF       Not implemented
+FreeImage_GetFIFExtensionList    Not implemented
+FreeImage_GetFIFDescription      Not implemented
+FreeImage_GetFIFRegExpr          Not implemented
+FreeImage_GetFIFFromFilename     Not implemented
+FreeImage_GetFIFFromFilenameU    Not implemented
+FreeImage_FIFSupportsReading     Not implemented
+FreeImage_FIFSupportsWriting     Not implemented
+FreeImage_FIFSupportsExportType  Not implemented
+FreeImage_FIFSupportsExportBPP   Not implemented
+FreeImage_FIFSupportsICCProfiles Not implemented
+FreeImage_FIFSupportsNoPixels    Not implemented
+FreeImage_RegisterLocalPlugin    Not implemented
+FreeImage_RegisterExternalPlugin Not implemented
+================================ ===============
 
 
 Multipage functions
 ^^^^^^^^^^^^^^^^^^^
 
-=================================== ======
+=================================== ===============
 C                                   Python
-=================================== ======
-FreeImage_OpenMultiBitmap
-FreeImage_OpenMultiBitmapFromHandle
-FreeImage_SaveMultiBitmapToHandle
-FreeImage_CloseMultiBitmap
-FreeImage_GetPageCount
-FreeImage_AppendPage
-FreeImage_InsertPage
-FreeImage_DeletePage
-FreeImage_LockPage
-FreeImage_UnlockPage
-FreeImage_MovePage
-FreeImage_GetLockedPageNumbers
-=================================== ======
+=================================== ===============
+FreeImage_OpenMultiBitmap           Not implemented
+FreeImage_OpenMultiBitmapFromHandle Not implemented
+FreeImage_SaveMultiBitmapToHandle   Not implemented
+FreeImage_CloseMultiBitmap          Not implemented
+FreeImage_GetPageCount              Not implemented
+FreeImage_AppendPage                Not implemented
+FreeImage_InsertPage                Not implemented
+FreeImage_DeletePage                Not implemented
+FreeImage_LockPage                  Not implemented
+FreeImage_UnlockPage                Not implemented
+FreeImage_MovePage                  Not implemented
+FreeImage_GetLockedPageNumbers      Not implemented
+=================================== ===============
 
 
 Memory I/O streams
 ^^^^^^^^^^^^^^^^^^
 
-=================================== ======
+=================================== ===============
 C                                   Python
-=================================== ======
-FreeImage_OpenMemory
-FreeImage_CloseMemory
-FreeImage_LoadFromMemory
-FreeImage_SaveToMemory
-FreeImage_AcquireMemory
-FreeImage_TellMemory
-FreeImage_SeekMemory
-FreeImage_ReadMemory
-FreeImage_WriteMemory
-FreeImage_LoadMultiBitmapFromMemory
-FreeImage_SaveMultiBitmapToMemory
-=================================== ======
+=================================== ===============
+FreeImage_OpenMemory                Not implemented
+FreeImage_CloseMemory               Not implemented
+FreeImage_LoadFromMemory            Not implemented
+FreeImage_SaveToMemory              Not implemented
+FreeImage_AcquireMemory             Not implemented
+FreeImage_TellMemory                Not implemented
+FreeImage_SeekMemory                Not implemented
+FreeImage_ReadMemory                Not implemented
+FreeImage_WriteMemory               Not implemented
+FreeImage_LoadMultiBitmapFromMemory Not implemented
+FreeImage_SaveMultiBitmapToMemory   Not implemented
+=================================== ===============
 
 
 Compression functions
 ^^^^^^^^^^^^^^^^^^^^^
 
-======================== ======
+======================== ===============
 C                        Python
-======================== ======
-FreeImage_ZLibCompress
-FreeImage_ZLibUncompress
-FreeImage_ZLibGZip
-FreeImage_ZLibCRC32
-FreeImage_ZlibGUnzip
-======================== ======
+======================== ===============
+FreeImage_ZLibCompress   Not implemented
+FreeImage_ZLibUncompress Not implemented
+FreeImage_ZLibGZip       Not implemented
+FreeImage_ZLibCRC32      Not implemented
+FreeImage_ZlibGUnzip     Not implemented
+======================== ===============
 
 
 Helper functions
 ^^^^^^^^^^^^^^^^
 
-======================== ======
+======================== ===============
 C                        Python
-======================== ======
-FreeImage_IsLittleEndian
-FreeImage_LookupX11Color
-FreeImage_LookupSVGColor
-======================== ======
+======================== ===============
+FreeImage_IsLittleEndian Not implemented
+FreeImage_LookupX11Color Not implemented
+FreeImage_LookupSVGColor Not implemented
+======================== ===============
 
 
 Metadata functions
@@ -275,8 +275,8 @@ Tag creation and destruction
 =================== =====================================
 C                   Python
 =================== =====================================
-FreeImage_CreateTag
-FreeImage_DeleteTag
+FreeImage_CreateTag Not implemented
+FreeImage_DeleteTag Not implemented
 FreeImage_CloneTag  :func:`pyfreeimage.metadata.Tag.copy`
 =================== =====================================
 
@@ -287,20 +287,20 @@ Tag accessors
 =========================== ============================================
 C                           Python
 =========================== ============================================
-FreeImage_GetTagKey         :func:`pyfreeimage.metadata.Tag.key`
-FreeImage_GetTagDescription :func:`pyfreeimage.metadata.Tag.description`
-FreeImage_GetTagID          :func:`pyfreeimage.metadata.Tag.id`
-FreeImage_GetTagType        :func:`pyfreeimage.metadata.Tag.type`
-FreeImage_GetTagCount       :func:`pyfreeimage.metadata.Tag.count`
-FreeImage_GetTagLength
-FreeImage_GetTagValue       :func:`pyfreeimage.metadata.Tag.value`
-FreeImage_SetTagKey
-FreeImage_SetTagDescription
-FreeImage_SetTagID
-FreeImage_SetTagType
-FreeImage_SetTagCount
-FreeImage_SetTagLength
-FreeImage_SetTagValue
+FreeImage_GetTagKey         :data:`pyfreeimage.metadata.Tag.key`
+FreeImage_GetTagDescription :data:`pyfreeimage.metadata.Tag.description`
+FreeImage_GetTagID          :data:`pyfreeimage.metadata.Tag.id`
+FreeImage_GetTagType        :data:`pyfreeimage.metadata.Tag.type`
+FreeImage_GetTagCount       :data:`pyfreeimage.metadata.Tag.count`
+FreeImage_GetTagLength      Not implemented
+FreeImage_GetTagValue       :data:`pyfreeimage.metadata.Tag.value`
+FreeImage_SetTagKey         Not implemented
+FreeImage_SetTagDescription Not implemented
+FreeImage_SetTagID          Not implemented
+FreeImage_SetTagType        Not implemented
+FreeImage_SetTagCount       Not implemented
+FreeImage_SetTagLength      Not implemented
+FreeImage_SetTagValue       Not implemented
 =========================== ============================================
 
 
@@ -323,20 +323,20 @@ Metadata accessors
 C                     Python
 ===================== ===================================
 FreeImage_GetMetadata :func:`pyfreeimage.image.Image.tag`
-FreeImage_SetMetadata
+FreeImage_SetMetadata Not implemented
 ===================== ===================================
 
 
 Metadata helper functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-========================== ======================================
+========================== ========================================
 C                          Python
-========================== ======================================
-FreeImage_GetMetadataCount
-FreeImage_CloneMetadata
-FreeImage_TagToString      :func:`pyfreeimage.metadata.Tag.value`
-========================== ======================================
+========================== ========================================
+FreeImage_GetMetadataCount Not implemented
+FreeImage_CloneMetadata    :func:`pyfreeimage.metadata.Tag.copy`
+FreeImage_TagToString      :func:`pyfreeimage.metadata.Tag.__str__`
+========================== ========================================
 
 
 Toolkit functions
@@ -346,111 +346,111 @@ Toolkit functions
 Rotation and flipping
 ^^^^^^^^^^^^^^^^^^^^^
 
-======================== ======
+======================== ===============
 C                        Python
-======================== ======
-FreeImage_Rotate
-FreeImage_RotateEx
-FreeImage_FlipHorizontal
-FreeImage_FlipVertical
-======================== ======
+======================== ===============
+FreeImage_Rotate         Not implemented
+FreeImage_RotateEx       Not implemented
+FreeImage_FlipHorizontal Not implemented
+FreeImage_FlipVertical   Not implemented
+======================== ===============
 
 
 Upsampling / downsampling
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-======================= ======
+======================= ===============
 C                       Python
-======================= ======
-FreeImage_Rescale
-FreeImage_MakeThumbnail
-======================= ======
+======================= ===============
+FreeImage_Rescale       Not implemented
+FreeImage_MakeThumbnail Not implemented
+======================= ===============
 
 
 Color manipulation
 ^^^^^^^^^^^^^^^^^^
 
-==================================== ======
+==================================== ===============
 C                                    Python
-==================================== ======
-FreeImage_AdjustCurve
-FreeImage_AdjustGamma
-FreeImage_AdjustBrightness
-FreeImage_AdjustContrast
-FreeImage_Invert
-FreeImage_GetHistogram
-FreeImage_GetAdjustColorsLookupTable
-FreeImage_AdjustColors
-FreeImage_ApplyColorMapping
-FreeImage_SwapColors
-FreeImage_ApplyPaletteIndexMapping
-FreeImage_SwapPaletteIndices
-==================================== ======
+==================================== ===============
+FreeImage_AdjustCurve                Not implemented
+FreeImage_AdjustGamma                Not implemented
+FreeImage_AdjustBrightness           Not implemented
+FreeImage_AdjustContrast             Not implemented
+FreeImage_Invert                     Not implemented
+FreeImage_GetHistogram               Not implemented
+FreeImage_GetAdjustColorsLookupTable Not implemented
+FreeImage_AdjustColors               Not implemented
+FreeImage_ApplyColorMapping          Not implemented
+FreeImage_SwapColors                 Not implemented
+FreeImage_ApplyPaletteIndexMapping   Not implemented
+FreeImage_SwapPaletteIndices         Not implemented
+==================================== ===============
 
 
 Channel processing
 ^^^^^^^^^^^^^^^^^^
 
-=========================== ======
+=========================== ===============
 C                           Python
-=========================== ======
-FreeImage_GetChannel
-FreeImage_SetChannel
-FreeImage_GetComplexChannel
-FreeImage_SetComplexChannel
-=========================== ======
+=========================== ===============
+FreeImage_GetChannel        Not implemented
+FreeImage_SetChannel        Not implemented
+FreeImage_GetComplexChannel Not implemented
+FreeImage_SetComplexChannel Not implemented
+=========================== ===============
 
 
 Copy / Paste / Composite routines
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-============================== ======
+============================== ===============
 C                              Python
-============================== ======
-FreeImage_Copy
-FreeImage_Paste
-FreeImage_Composite
-FreeImage_PreMultiplyWithAlpha
-============================== ======
+============================== ===============
+FreeImage_Copy                 Not implemented
+FreeImage_Paste                Not implemented
+FreeImage_Composite            Not implemented
+FreeImage_PreMultiplyWithAlpha Not implemented
+============================== ===============
 
 
 JPEG lossless transformations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-========================================= ======
+========================================= ===============
 C                                         Python
-========================================= ======
-FreeImage_JPEGTransform
-FreeImage_JPEGTransformU
-FreeImage_JPEGCrop
-FreeImage_JPEGCropU
-FreeImage_JPEGTransformCombined
-FreeImage_JPEGTransformCombinedU
-FreeImage_JPEGTransformCombinedFromMemory
-========================================= ======
+========================================= ===============
+FreeImage_JPEGTransform                   Not implemented
+FreeImage_JPEGTransformU                  Not implemented
+FreeImage_JPEGCrop                        Not implemented
+FreeImage_JPEGCropU                       Not implemented
+FreeImage_JPEGTransformCombined           Not implemented
+FreeImage_JPEGTransformCombinedU          Not implemented
+FreeImage_JPEGTransformCombinedFromMemory Not implemented
+========================================= ===============
 
 
 Background filling
 ^^^^^^^^^^^^^^^^^^
 
-======================== ======
+======================== ===============
 C                        Python
-======================== ======
-FreeImage_FillBackground
-FreeImage_EnlargeCanvas
-FreeImage_AllocateEx
-FreeImage_AllocateExT
-======================== ======
+======================== ===============
+FreeImage_FillBackground Not implemented
+FreeImage_EnlargeCanvas  Not implemented
+FreeImage_AllocateEx     Not implemented
+FreeImage_AllocateExT    Not implemented
+======================== ===============
 
 
 Miscellaneous algorithms
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-================================ ======
+================================ ===============
 C                                Python
-================================ ======
-FreeImage_MultigridPoissonSolver
-================================ ======
+================================ ===============
+FreeImage_MultigridPoissonSolver Not implemented
+================================ ===============
 
 .. rubric:: Footnotes
 
