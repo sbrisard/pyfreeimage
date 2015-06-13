@@ -25,3 +25,10 @@ API of module :mod:`pyfreeimage.metadata`
 
 .. automodule:: pyfreeimage.metadata
    :members:
+
+
+API of module :mod:`pyfreeimage.transform`
+------------------------------------------
+
+.. automodule:: pyfreeimage.transform
+   :members:

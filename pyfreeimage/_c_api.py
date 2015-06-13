@@ -98,3 +98,10 @@ _init_signature('FreeImage_GetMetadataCount', c_uint, [c_int, c_void_p])
 # Metadata helper functions
 # -------------------------
 _init_signature('FreeImage_TagToString', c_char_p, [c_int, c_void_p, c_char_p])
+
+# Toolkit functions
+# =================
+
+# Upsampling / downsampling
+# -------------------------
+_init_signature('FreeImage_Rescale', c_void_p, [c_void_p, c_int, c_int, c_int])

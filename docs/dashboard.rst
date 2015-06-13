@@ -359,12 +359,12 @@ FreeImage_FlipVertical   Not implemented
 Upsampling / downsampling
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-======================= ===============
+======================= =====================================
 C                       Python
-======================= ===============
-FreeImage_Rescale       Not implemented
+======================= =====================================
+FreeImage_Rescale       :func:`pyfreeimage.transform.rescale`
 FreeImage_MakeThumbnail Not implemented
-======================= ===============
+======================= =====================================
 
 
 Color manipulation
