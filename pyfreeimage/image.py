@@ -4,17 +4,14 @@ import ctypes
 import functools
 import operator
 
-from pyfreeimage.constants import FIMD_EXIF_MAIN
+from pyfreeimage._c_api import cfi
+from pyfreeimage.constants import FIMD_EXIF_MAIN, FIT_BITMAP
 from pyfreeimage.metadata import Tag
 
 try:
     from weakref import finalize
 except ImportError:
     from pyfreeimage.wrutils import finalize
-
-import pyfreeimage.constants
-
-from pyfreeimage._c_api import cfi
 
 
 class Image:
@@ -118,7 +115,7 @@ class Image:
 
 
 def empty(width, height, bpp, rmask=0, gmask=0, bmask=0,
-          fitype=pyfreeimage.constants.FIT_BITMAP):
+          fitype=FIT_BITMAP):
     """Return a new image of specified shape, bit depth and type.
 
     The returned image is filled with zeros. For 8-bit images only,

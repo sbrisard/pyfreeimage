@@ -7,6 +7,10 @@ Attributes:
         module is wrapped around.
 """
 
+import pyfreeimage.io
+import pyfreeimage.metadata
+import pyfreeimage.transform
+
 from pyfreeimage.image import Image, empty
 from pyfreeimage.constants import *
 from pyfreeimage._c_api import cfi

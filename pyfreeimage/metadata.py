@@ -5,8 +5,13 @@ import ctypes
 from ctypes import cast, c_byte, c_char_p, c_void_p
 from weakref import finalize
 
-from pyfreeimage._c_api import cfi as cfi
-from pyfreeimage.constants import *
+from pyfreeimage._c_api import cfi
+from pyfreeimage.constants import FIDT_BYTE, FIDT_ASCII, FIDT_SHORT, FIDT_LONG
+from pyfreeimage.constants import FIDT_RATIONAL, FIDT_SBYTE, FIDT_UNDEFINED
+from pyfreeimage.constants import FIDT_SSHORT, FIDT_SLONG, FIDT_SRATIONAL
+from pyfreeimage.constants import FIDT_FLOAT, FIDT_DOUBLE, FIDT_IFD
+from pyfreeimage.constants import FIDT_PALETTE, FIDT_LONG8, FIDT_SLONG8
+from pyfreeimage.constants import FIDT_IFD8
 
 _type_map = {FIDT_BYTE: ctypes.c_uint8,
              FIDT_ASCII: ctypes.c_char,
